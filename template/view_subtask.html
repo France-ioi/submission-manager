@@ -1,0 +1,31 @@
+<accordion-heading>
+	<div class="subtask">
+		<span class="subtask_name">
+			<span class="glyphicon glyphicon-ok image_succeed_subtask" ng-show="submissionSubtask.iSuccess"></span>
+			<span class="glyphicon glyphicon-remove image_failure_subtask" ng-show="!submissionSubtask.iSuccess"></span>
+			{{submissionSubtask.subtask_name}} 
+		</span>
+		
+		<span class="subtask_data">
+			<span>
+				Tests validés : {{countTestsSucceeded(submissionSubtask)}} / {{submissionSubtask.submissionTests.length}}
+				<span class="subtask_min_test">
+					<span ng-repeat="curTest in submissionSubtask.submissionTests" ng-include src="'template/view_test_min.html'"  class="disp_min"></span>
+				</span>
+			</span>
+		</span>
+		
+		<span class="score">
+			Score : {{round(submissionSubtask.iScore * submissionSubtask.subtask_iPointsMax / 100)}} / {{submissionSubtask.subtask_iPointsMax}}
+		</span>
+	</div>
+
+</accordion-heading>
+
+<div class="test">
+	<accordion close-others="true">
+		<accordion-group ng-repeat="curTest in submissionSubtask.submissionTests" is-open="curTest.cached.isShown">
+			<div ng-include src="'template/view_test.html'"></div>
+		</accordion-group>
+	</accordion>
+</div>

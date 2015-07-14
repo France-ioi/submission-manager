@@ -1,0 +1,22 @@
+{
+  "name": "submission-manager",
+  "version": "0.1.0",
+  "homepage": "https://github.com/France-ioi/submission-manager",
+  "authors": [
+    "France-IOI"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "raphael": "~2.1.4",
+    "angular": "~1.4.2",
+    "bootstrap": "~3.3.5"
+  }
+}

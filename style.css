@@ -1,0 +1,276 @@
+/* iFrame */
+
+.submission_iframe
+{
+   border: none;
+   overflow: hidden;
+   width: 100%;
+   height: 0px;
+}
+
+/* Bootstrap modifications and global style */
+
+.nav, .pagination, .carousel, .panel-title a, .panel-heading { cursor: pointer; }
+
+.submission_global
+{
+   padding-left: 10px;
+   padding-right: 10px;
+   padding-bottom: 10px;
+   /*font-size: 1em;*/
+}
+
+.submission_global a:hover
+{
+   text-decoration: none !important;
+}
+
+.submission_global .panel-group .panel-heading
+{
+   background-color: #D3D3D3;
+}
+
+
+.submission_global .panel-group .panel-group .panel-heading
+{
+   background-color: #E4E4E4;
+}
+
+.submission_global .panel-group .panel-group .panel-group .panel-heading
+{
+   background-color: #F5F5F5;
+}
+
+.panel-body
+{
+	/*padding-bottom: 10px !important;*/
+}
+
+.submission_global .panel-body
+{
+   /*padding-left: 10px !important;*/
+}
+
+/* Submission Heading */
+
+.submission
+{
+   font-size: 18px;
+   line-height: 30px;
+}
+
+.submission_data
+{
+   padding-left: 20%;
+}
+
+.submission_min_test
+{
+   padding-top: 10px;
+}
+
+.submission_details
+{
+   padding-left: 40px;
+}
+
+/* Submission infos */
+
+.submission_error
+{
+   padding: 5px;
+   /*width: 95%;*/
+   border: 1px solid black;
+   background-color: #FECBCB;
+}
+
+.compil_error
+{
+   margin-left: 20px;
+   margin-bottom: 15px;
+   /*width: 95%;*/
+   border: 1px solid #FFC90E;
+   background-color: #FFFFC1 !important;
+   padding: 8px;
+}
+
+.compil_error pre, .submission_error pre
+{
+   background-color: inherit !important;
+   border: none !important;
+   font-size: inherit !important;
+   padding: 0 !important;
+   width: 100% !important;
+   font-family: inherit !important;
+   font-style: inherit !important;
+   line-height: inherit !important;
+   color: inherit !important;
+}
+
+.score
+{
+   float: right;
+   font-weight: bold;
+   color: black !important;
+   padding-right: 10px;
+}
+
+/* Subtasks */
+
+.subtask
+{
+   /*background-color: #E0FFDB;*/
+   border: none;
+   font-size: 18px;
+   text-align: center;
+   /*border: 1px solid black; */
+}
+
+.subtask_name
+{
+   float: left;
+}
+
+.subtask_data
+{
+   /*padding-left: 33%;*/
+}
+
+.subtask_min_test
+{
+   padding-left: 25px;
+}
+
+/* Tests */
+
+.test
+{
+   /*padding-left: 20px;*/
+   /*margin: auto;*/
+}
+
+.test .panel-heading
+{
+   padding-bottom: 1px !important;
+   padding-top: 3px !important;
+}
+
+.test .panel-heading p
+{
+   margin-bottom: 2px !important;
+}
+
+.disp_min
+{
+   text-align: center;
+   border: 1px solid black;
+   padding: 1px;
+}
+
+.resultTest
+{
+   display: inline-block;
+   padding: 3px 20px 3px 20px;
+   border-radius: 150px;
+   /*box-shadow: 5px 6px 5px #888888;*/
+   color: white !important;
+   width: 290px;
+   text-align: center;
+}
+
+.idTest
+{
+   display: inline-block;
+   width: 100px;
+}
+
+.log
+{
+   background-color: #EAEAEA;
+   margin: 5px;
+   padding: 2px;
+   font-size: 12px;
+}
+
+.charDiff
+{
+   background-color: #FF401F;
+}
+
+/* Pictures */
+
+.submission .glyphicon
+{
+   background-color: inherited;
+}
+
+.succeed_test
+{
+   background-color: #0DC811;
+}
+
+.image_succeed_test, .image_succeed_subtask, .image_succeed_task
+{
+   color: #0DC811;
+}
+
+.error_test
+{
+   background-color: #D5111B;
+}
+
+.image_error_test, .image_failure_subtask, .image_failure_task
+{
+   color: #D5111B;
+}
+
+.timeout_test
+{
+   background-color: #3039B1;
+}
+
+.image_timeout_test
+{
+   color: #3039B1;
+}
+
+.crash_test
+{
+   background-color: #313131;
+}
+
+.image_crash_test
+{
+   color: #313131;
+}
+
+.relative_test
+{
+   background-color: #FF7F27;
+}
+
+.image_relative_test
+{  
+   color: #FF7F27;
+}
+
+/* Animation */
+
+#simuShow {
+   text-align:center;
+}
+#simuShow > table {
+   background:white;
+   padding:5px;
+   margin:auto;
+}
+#simuMsg {
+   background:white;
+   color:red; 
+   font-weight: bold;
+   text-align:center;
+}
+#simuToolbar {
+   text-align:center;
+   margin:10px;
+}

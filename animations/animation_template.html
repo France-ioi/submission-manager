@@ -1,0 +1,40 @@
+<!-- This file can only be used for development purpose -->
+
+<script type="text/javascript" src="animation.js"></script>
+<script type="text/javascript" src="../ext/jquery/jquery.min.js"></script>
+
+<script type="text/javascript">
+var animationFeatures = function (selector) { // The animation must be develop here.
+	
+	
+
+}
+
+var commands = [];
+
+simulationInstance("#placeToPlayAnimation", animationFeatures("#placeToPlayAnimation"), commands);
+
+</script>
+
+<div id="placeToPlayAnimation">
+	<!-- Images used in the simulation : needed because the URL will change -->
+	<div id="simuImages" style="display:none">
+	</div>
+
+	<div id="simuTemplate" style="display:none;text-align:center">
+	   <!-- The place to do the simulation -->
+	   <div id="simuShow">
+	   </div>
+	   <!-- The place to display texte -->
+	   <div id="simuMsg">   
+	   </div>
+	   <!-- Toolbar -->
+	   <div id="simuToolbar">
+		  <input type="button" class="play" value="Exécuter tout" />
+		  <input type="button" class="pause" value="Exécuter une étape" />
+		  <input type="button" class="restart" value="Recommencer" />
+	   </div>
+	   <pre class="textOutput" style="display:none;background:#C0C0C0;text-align:left">
+	   </pre>
+	</div>
+</div>

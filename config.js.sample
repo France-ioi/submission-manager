@@ -1,0 +1,5 @@
+/* Please copy this file to config.js */
+var rootUrl = '/';
+
+var completeUrl = 'http://'; // the full url MUST be set here (and not only '/' for example)
+

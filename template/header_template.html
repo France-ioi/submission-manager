@@ -1,0 +1,30 @@
+<script type="text/ng-template" id="image_test.html">
+   <span ng-if="curTest.iScore == 0 || curTest.iScore == 100" class="{{submissionManager.getClassImageTest(curTest.iErrorCode)}}"></span>
+   <span ng-if="!(curTest.iScore == 0 || curTest.iScore == 100)" class="{{submissionManager.getClassImageTest(ERROR_RelativeScore)}}"></span>
+</script>
+
+<div class="submission" ng-if="submission != undefined && !loading && hasAskedSubmission">
+	<span class="submission_span submission_info">
+	   <span class="glyphicon glyphicon-ok image_succeed_task checkImage" ng-show="submission.iSuccess == 1"></span>
+	   <span class="glyphicon glyphicon-remove image_failure_task checkImage" ng-show="!(submission.iSuccess == 1)"></span>
+	   Soumission en {{submission.sourceCode.sLangProg}}
+	   le {{submission.sDate | date:'dd/MM/yyyy à HH:mm'}}
+	</span>
+	
+	<span class="submission_span submission_data"> <!-- centered datas -->
+	</span>
+	<span class="submission_span score">Score : {{submission.iScore}} / 100</span>
+ 
+	<br />
+	   
+	<span class="submission_details">    
+	   <span ng-if="submission.submissionSubtasks.length > 0">Sous-tâches validées : {{submissionManager.countSubtasksSucceeded(submission)}} / {{submission.submissionSubtasks.length}}</span>
+	   <span ng-if="submission.submissionSubtasks.length == 0">Test validés : {{submission.nbTestsPassed}} / {{submission.nbTestsTotal}}</span>    			
+	   &nbsp;&nbsp;
+	   <span class="submission_min_test disp_min" ng-if="submission.submissionSubtasks.length == 0" ng-repeat="curTest in submission.tests" ng-include src="'template/view_test_min.html'"></span>
+	   <span class="submission_min_test" ng-if="submission.submissionSubtasks.length > 0" ng-repeat="submissionSubtask in submission.submissionSubtasks">
+		  <span ng-repeat="curTest in submissionSubtask.submissionTests" ng-include src="'template/view_test_min.html'"  class="disp_min"></span>
+		  &nbsp;&nbsp;
+	   </span>
+	</span>
+ </div>
