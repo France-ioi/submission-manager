@@ -20,12 +20,11 @@ CREATE TABLE `tm_submissions` (
   `sMode` enum('Submitted','LimitedTime','Contest') NOT NULL DEFAULT 'Submitted',
   `iChecksum` int(11) NOT NULL DEFAULT '0',
   `iVersion` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`ID`),
   KEY `synchro` (`iVersion`),
   KEY `checksum` (`iChecksum`),
   KEY `date` (`sDate`),
-  KEY `idUser2` (`idUser`),
+  KEY `idUser2` (`idUser`,`idPlatform`),
   KEY `idTask` (`idTask`),
-  KEY `idSourceCode` (`idSourceCode`),
-  KEY `idPlatform` (`idPlatform`)
+  KEY `idSourceCode` (`idSourceCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8

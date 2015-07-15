@@ -6,6 +6,6 @@ CREATE TABLE `tm_grader_checks` (
   `sSource` mediumtext NOT NULL COMMENT 'TODO',
   `sTestData` mediumtext NOT NULL COMMENT 'TODO',
   `iVersion` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`ID`),
   KEY `synchro` (`iVersion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8

@@ -68,7 +68,6 @@ $tablesModels = array (
       ),
    ),
    "tm_tasks_subtasks" => array(
-      "primaryKey" => "id",
       "autoincrementID" => false,
       "fields" => array(
          "idTask" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),

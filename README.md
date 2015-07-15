@@ -12,6 +12,8 @@ Run
 
 ### Testing
 
+Fill tm_platform with a platform with id `1`.
+
 Run `php tests/tests.php` to load some data.
 
 In order to insert a submission in a page, this is the code to use :

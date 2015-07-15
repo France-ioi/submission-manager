@@ -7,4 +7,4 @@ CREATE TABLE `tm_tasks_subtasks` (
   `weighting` int(11) NOT NULL,
   `iVersion` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

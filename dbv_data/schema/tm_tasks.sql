@@ -16,6 +16,6 @@ CREATE TABLE IF NOT EXISTS `tm_tasks` (
   `iVersion` int(11) NOT NULL DEFAULT '0',
   `bBebras` tinyint(1) NOT NULL DEFAULT '0',
   `sBebrasUrl` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`ID`),
   UNIQUE KEY `text_id` (`sTextId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -9,7 +9,7 @@ CREATE TABLE `tm_source_codes` (
   `sSource` mediumtext NOT NULL,
   `bEditable` tinyint(4) NOT NULL,
   `iVersion` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`ID`),
   KEY `UserTask` (`idUser`,`idTask`),
   KEY `idTask` (`idTask`),
   KEY `synchro` (`iVersion`)

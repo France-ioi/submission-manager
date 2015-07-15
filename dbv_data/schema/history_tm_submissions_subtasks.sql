@@ -6,7 +6,7 @@ CREATE TABLE `history_tm_submissions_subtasks` (
   `idSubtask` bigint(20) NOT NULL,
   `idSubmission` bigint(20) NOT NULL,
   `iVersion` int(11) NOT NULL,
-  `iNextVersion` int(11),
+  `iNextVersion` int(11) DEFAULT NULL,
   `bDeleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`historyID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

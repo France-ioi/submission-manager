@@ -9,10 +9,9 @@ CREATE TABLE `tm_submissions_tests` (
   `sExpectedOutput` mediumtext NOT NULL,
   `iVersion` int(11) NOT NULL,
   `idSubmissionSubtask` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`ID`),
   KEY `synchro` (`iVersion`),
   KEY `idSubmission` (`idSubmission`),
   KEY `idTest` (`idTest`),
-  KEY `idTest_2` (`idTest`),
-  CONSTRAINT `tm_submissions_tests_ibfk_1` FOREIGN KEY (`idTest`) REFERENCES `tm_tasks_tests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `tm_submissions_tests_ibfk_1` FOREIGN KEY (`idTest`) REFERENCES `tm_tasks_tests` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8

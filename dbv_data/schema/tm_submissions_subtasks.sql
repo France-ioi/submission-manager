@@ -5,6 +5,5 @@ CREATE TABLE `tm_submissions_subtasks` (
   `idSubtask` bigint(20) NOT NULL,
   `idSubmission` bigint(20) NOT NULL,
   `iVersion` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

@@ -21,7 +21,7 @@ CREATE TABLE `history_tm_submissions` (
   `sMode` enum('Submitted','LimitedTime','Contest') NOT NULL DEFAULT 'Submitted',
   `iChecksum` int(11) NOT NULL DEFAULT '0',
   `iVersion` int(11) NOT NULL,
-  `iNextVersion` int(11),
+  `iNextVersion` int(11) DEFAULT NULL,
   `bDeleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`historyID`),
   KEY `synchro` (`iVersion`),
