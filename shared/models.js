@@ -8,7 +8,7 @@ var models =
          idUser: {type : "int"},
          idTask: {type : "int"},
          sDate: {type : "jsdate"},
-         sLangProg: {type : "string"},
+         sParams: {type : "string"},
          sName: {type : "string"},
          sSource: {type : "string"},
          bEditable: {type : "int"}

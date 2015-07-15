@@ -1,8 +1,14 @@
 # submission-manager
 
-Please copy config.sample.js to config.js and config_template.json to config.json
+### Installation
 
-You can execute /tests/tests.php to load some datas.
+Copy `config_local_template.php` to `config_local.php` and fill it. Run
+
+    php commonFramework/modelsManager/triggers.php
+
+### Testing
+
+Run `php tests/tests.php` to load some data.
 
 In order to insert a submission in a page, this is the code to use :
 
