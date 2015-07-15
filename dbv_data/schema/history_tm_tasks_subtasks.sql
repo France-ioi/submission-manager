@@ -3,7 +3,7 @@ CREATE TABLE `history_tm_tasks_subtasks` (
   `ID` int(11) NOT NULL,
   `idTask` int(11) NOT NULL COMMENT 'Problem''s ID',
   `name` varchar(255) NOT NULL,
-  `comment` text NOT NULL,
+  `comments` text NOT NULL,
   `iPointsMax` int(11) NOT NULL,
   `weighting` int(11) NOT NULL,
   `iVersion` int(11) NOT NULL,
