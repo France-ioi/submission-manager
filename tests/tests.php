@@ -1,5 +1,5 @@
 <?php
-	include('../modelsManager/connect.php');
+	include(__DIR__.'/../shared/connect.php');
 
 	$db->exec("DELETE FROM tm_tasks WHERE sTextId = 'FranceIOI/Tests/test_1'");
 

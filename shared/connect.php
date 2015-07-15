@@ -1,12 +1,7 @@
 <?php
 
-require_once 'LoggedPDO.php';
-
-function getConfig() {
-   $configContent = file_get_contents("../config.json");
-   $config = json_decode($configContent);
-   return $config;
-}
+require_once __DIR__.'/LoggedPDO.php';
+require_once __DIR__.'/../config.php';
 
 function connect($config) {
    try {
@@ -24,7 +19,4 @@ function connect($config) {
    return $db;
 }
 
-$config = getConfig();
 $db = connect($config);
-
-?>
