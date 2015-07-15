@@ -12,8 +12,8 @@
 	
 	//mysql_query("DELETE FROM tm_soure_codes WHERE id = 5273408;");
 
-	$db->exec("INSERT INTO `tm_source_codes` (`idUser`, `idTask`, `sDate`, `sLangProg`, `sName`, `sSource`, `bEditable`, `iVersion`) VALUES
-	(21690, " . $idTask . ", '2013-04-22 17:17:09', 'C++', '', '#include <iostream>\r\n#include <math.h>\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    int aire;\r\n    cin >> aire;\r\n\r\n    cout << (pow(aire, 2)) * 23;\r\n}\r\n', 0, 0);
+	$db->exec("INSERT INTO `tm_source_codes` (`idUser`, `idTask`, `sDate`, `sParams`, `sName`, `sSource`, `bEditable`, `iVersion`) VALUES
+	(21690, " . $idTask . ", '2013-04-22 17:17:09', '{\"sLangProg\":\"C++\"}', '', '#include <iostream>\r\n#include <math.h>\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    int aire;\r\n    cin >> aire;\r\n\r\n    cout << (pow(aire, 2)) * 23;\r\n}\r\n', 0, 0);
 	");
 	
 	$idSourceCode = $db->lastInsertId(); 
@@ -146,8 +146,8 @@
 	$idTask = $db->lastInsertId(); 
 	
 	
-	$db->exec("INSERT INTO `tm_source_codes` (`idUser`, `idTask`, `sDate`, `sLangProg`, `sName`, `sSource`, `bEditable`, `iVersion`) VALUES
-	(21690, " . $idTask . ", '2013-04-22 17:17:09', 'C++', '', '#include <iostream>\r\n#include <math.h>\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    int aire;\r\n    cin >> aire;\r\n\r\n    cout << (pow(aire, 2)) * 23;\r\n}\r\n', 0, 0);
+	$db->exec("INSERT INTO `tm_source_codes` (`idUser`, `idTask`, `sDate`, `sParams`, `sName`, `sSource`, `bEditable`, `iVersion`) VALUES
+	(21690, " . $idTask . ", '2013-04-22 17:17:09', '{\"sLangProg\":\"C++\"}', '', '#include <iostream>\r\n#include <math.h>\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    int aire;\r\n    cin >> aire;\r\n\r\n    cout << (pow(aire, 2)) * 23;\r\n}\r\n', 0, 0);
 	");
 	
 	$idSourceCode = $db->lastInsertId();
@@ -175,8 +175,8 @@
 	$idTask = $db->lastInsertId(); 
 	
 	
-	$db->exec("INSERT INTO `tm_source_codes` (`idUser`, `idTask`, `sDate`, `sLangProg`, `sName`, `sSource`, `bEditable`, `iVersion`) VALUES
-	(21690, " . $idTask . ", '2013-04-22 17:17:09', 'C++', '', '#include <iostream>\r\n#include <math.h>\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    int aire;\r\n    cin >> aire;\r\n\r\n    cout << (pow(aire, 2)) * 23;\r\n}\r\n', 0, 0);
+	$db->exec("INSERT INTO `tm_source_codes` (`idUser`, `idTask`, `sDate`, `sParams`, `sName`, `sSource`, `bEditable`, `iVersion`) VALUES
+	(21690, " . $idTask . ", '2013-04-22 17:17:09', '{\"sLangProg\":\"C++\"}', '', '#include <iostream>\r\n#include <math.h>\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    int aire;\r\n    cin >> aire;\r\n\r\n    cout << (pow(aire, 2)) * 23;\r\n}\r\n', 0, 0);
 	");
 	
 	$idSourceCode = $db->lastInsertId();

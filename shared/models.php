@@ -67,6 +67,7 @@ $tablesModels = array (
    "tm_tasks" => array(
       "primaryKey" => "id",
       "autoincrementID" => false,
+      "hasHistory" => false,
       "fields" => array(
          "sScriptAnimation" => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))),
       ),

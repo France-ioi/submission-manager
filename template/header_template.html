@@ -7,7 +7,7 @@
 	<span class="submission_span submission_info">
 	   <span class="glyphicon glyphicon-ok image_succeed_task checkImage" ng-show="submission.iSuccess == 1"></span>
 	   <span class="glyphicon glyphicon-remove image_failure_task checkImage" ng-show="!(submission.iSuccess == 1)"></span>
-	   Soumission en {{submission.sourceCode.sLangProg}}
+	   Soumission en {{submission.sourceCode.sParams.sLangProg}}
 	   le {{submission.sDate | date:'dd/MM/yyyy à HH:mm'}}
 	</span>
 	
