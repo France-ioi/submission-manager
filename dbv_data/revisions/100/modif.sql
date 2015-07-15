@@ -1,4 +1,4 @@
-UPDATE `franceioi_geof`.`tm_tasks` SET `sScriptAnimation` = 'var animationFeatures = function(selector) {
+UPDATE `tm_tasks` SET `sScriptAnimation` = 'var animationFeatures = function(selector) {
    var cellSize = 36;
    var margin = 10;
    var animTime = 250;
