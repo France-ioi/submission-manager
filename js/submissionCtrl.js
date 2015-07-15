@@ -1,5 +1,4 @@
 var submission = angular.module('submission', ['ui.bootstrap', 'ngRoute']);
-//var curSubmission = 734175;
 
 submission.directive('animation', function()
 {
@@ -16,7 +15,8 @@ submission.directive('animation', function()
          
          var hasLoadedSimulation = new Array();
          hasLoadedSimulation[$scope.idtest] = false;
-         $scope.commands = $.parseJSON($scope.commands)
+         console.error($scope.commands);
+         $scope.commands = $.parseJSON($scope.commands);
          var selector = '#anim' + $scope.idtest + '';
          
          
@@ -36,7 +36,9 @@ submission.directive('animation', function()
             
             
                }, 1);*/
-               simulationInstance(selector, animationFeatures(selector), $scope.commands);
+               if (typeof anumationFeatures !== 'undefined') {
+                  simulationInstance(selector, animationFeatures(selector), $scope.commands);
+               }
                $('.restart').trigger('click');
             }
          });
@@ -107,13 +109,11 @@ submission.controller('submissionCtrl', ['$scope', '$sce', '$location', function
                   
          if ($scope.submission.task_sScriptAnimation != '' && !$scope.hasLoadedAnimation)
          {
-            $.getScript('ext/raphael/raphael-min.js');
-            $.getScript('animations/animation.js');
+            $.getScript('animations/animation.js'); // TODO: load anyway?
             $scope.hasLoadedAnimation = true;
-            addScript($scope.submission.task_sScriptAnimation);
+            addScript($scope.submission.task_sScriptAnimation); // TODO: use eval instead?
          }
-         
-           
+
       }
       
       console.log($scope.submission);
@@ -163,12 +163,8 @@ submission.controller('submissionCtrl', ['$scope', '$sce', '$location', function
       }
    }
    
-   $scope.nl2br = function (str, is_xhtml) {
-      //  discuss at: http://phpjs.org/functions/nl2br/
-
-      var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>'; // Adjust comment to avoid issue on phpjs.org display
-
-      return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+   $scope.nl2br = function (str) {
+      return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br>$2');
    }
    
    $scope.toTrust = function(str)
@@ -184,7 +180,7 @@ submission.controller('submissionCtrl', ['$scope', '$sce', '$location', function
          if (curSubtask.submissionTests[iTest].iErrorCode == $scope.ERROR_NoError)
          {
             nbTestsSucceeded++;
-         }            
+         }
       }
       return nbTestsSucceeded;
    }
@@ -314,9 +310,9 @@ submission.controller('submissionCtrl', ['$scope', '$sce', '$location', function
          {
             result += "<span class=\"charDiff\">" + inputStr[pos] + "</span>";
             hasFoundError = true;
-         }   
+         }
       }
-      return result;   
+      return result;
    }
    
    $scope.formatDate = function(date) // Not used

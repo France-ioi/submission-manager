@@ -157,7 +157,7 @@ $viewModels['byIdSubmission'] = array (
    "tm_submissions" => array (
       "mainTable" => "tm_submissions",
          "joins" => array (
-            "tm_tasks" => array("srcTable" => "tm_submissions", "srcField" => "idTask", "dstField" => "ID")
+            "tm_tasks" => array("srcTable" => "tm_submissions", "srcField" => "idTask", "dstField" => "ID", "ignoreHistory" => true)
          ),
       "fields" => array (
          "idUser" => array(),
@@ -292,7 +292,7 @@ $viewModels['byTimeSubmission'] = array (
    "tm_submissions" => array (
       "mainTable" => "tm_submissions",
          "joins" => array (
-            "tm_tasks" => array("srcTable" => "tm_submissions", "srcField" => "idTask", "dstField" => "ID")
+            "tm_tasks" => array("srcTable" => "tm_submissions", "srcField" => "idTask", "dstField" => "ID", "ignoreHistory" => true)
          ),
       "fields" => array (
          "idUser" => array(),

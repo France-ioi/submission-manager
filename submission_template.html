@@ -1,30 +1,29 @@
+<!DOCTYPE html>
 <html lang="fr" ng-app='submission'>
    <head>
+      <meta charset="utf-8">
       <title>Vue des résultats d'une soumission</title>
-      <meta http-equiv="content-type" content="text/html;charset=utf-8" />
       <meta http-equiv="pragma" content="no-cache" />
       <meta http-equiv="cache-control" content="no-cache">
       <meta http-equiv="Expires" content="-1">
-      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
-      <script type="text/javascript">window.angular || document.write('<script src="ext/angular.min.js">\x3C/script>')</script>
-      <script src="ext/angularjs/angular-route.min.js"></script>
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-      <script type="text/javascript">window.jQuery || document.write('<script src="ext/jquery.min.js">\x3C/script>')</script>
-      <script src="ext/jquery/jquery.ba-postmessage.min.js"></script>
+      <script src="bower_components/jquery/dist/jquery.min.js"></script>
+      <script src="bower_components/angular/angular.min.js"></script>
+      <script src="bower_components/angular-route/angular-route.min.js"></script>
       <script src="ext/jquery/jquery.ba-resize.min.js"></script>
-      <script src="ext/bootstrap/ui-bootstrap_modified.js"></script> <!-- boostrap ui in angular. We only use local version because it has been modified -->
-      <script src="ext/raphael/raphael-min.js"></script>
-      <script src="modelsManager/modelsManager.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/raphael/raphael-min.js"></script>
+      <script src="commonFramework/modelsManager/modelsManager.js"></script>
       <script src="shared/models.js"></script>
       <script src="shared/utils.js"></script>
-      <script src="sync/syncQueue.js"></script>
+      <script src="commonFramework/sync/syncQueue.js"></script>
       <script src="js/heightManager.js"></script>
       <script src="js/submissionManager.js"></script>
       <script src="js/submissionCtrl.js"></script>
       <link href="style.css" type="text/css" rel="stylesheet">
-      <link href="ext/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-      <script src="config.js"></script>
+      <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="stext/css" rel="stylesheet">
       <script>
+         var rootUrl = 'commonFramework/';
          var textStatus = "";
       </script>
    </head>
@@ -47,7 +46,7 @@
                      </div>
                   </div>
                    
-                  <div ng-if="submission.bEvaluated">  
+                  <div ng-if="submission.bEvaluated">
                      <div ng-show="submission.bCompilError" class="submission_error">
                         Erreur de compilation<br />
                         <pre>{{submission.sCompilMgs}}</pre>
@@ -70,18 +69,17 @@
                            <accordion close-others="true">
                               <accordion-group ng-repeat="submissionSubtask in submission.submissionSubtasks" class="subtask_global" is-open="submissionSubtask.cached.showDetailsTests">
                                  <div ng-include src="'template/view_subtask.html'"></div>
-                              </accordion-group>				
+                              </accordion-group>
                            </accordion>
                         </div>
-                                                   
+
                         <div class="test" ng-if="submission.submissionSubtasks.length == 0">
                            <accordion close-others="true">
                               <accordion-group ng-repeat="curTest in submission.tests" is-open="curTest.cached.isShown">
                                  <div ng-include src="'template/view_test.html'"></div>
                               </accordion-group>
                            </accordion>
-                        </div>	
-                        				
+                        </div>
                      </div> <!-- End tests -->
                      
                   </div> 

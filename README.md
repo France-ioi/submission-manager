@@ -10,6 +10,8 @@ Run
 
     php commonFramework/modelsManager/triggers.php
 
+If you want to log requests, create a `logs` directory, giving write access to the user php runs as.
+
 ### Testing
 
 Fill tm_platform with a platform with id `1`.
