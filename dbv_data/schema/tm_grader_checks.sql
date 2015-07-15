@@ -1,11 +1,11 @@
 CREATE TABLE `tm_grader_checks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ID` bigint(20) NOT NULL,
   `sDescription` mediumtext NOT NULL COMMENT 'TODO',
-  `idTask` int(11) DEFAULT NULL COMMENT 'TODO',
-  `sLangProg` varchar(15) NOT NULL COMMENT 'TODO',
+  `idTask` bigint(20) DEFAULT NULL COMMENT 'TODO',
+  `sParams` tinytext NOT NULL COMMENT 'TODO',
   `sSource` mediumtext NOT NULL COMMENT 'TODO',
   `sTestData` mediumtext NOT NULL COMMENT 'TODO',
-  `iVersion` int(11) NOT NULL DEFAULT '0',
+  `iVersion` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `synchro` (`iVersion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8

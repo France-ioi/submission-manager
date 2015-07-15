@@ -1,7 +1,8 @@
 CREATE TABLE `tm_source_codes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idUser` int(11) NOT NULL,
-  `idTask` int(11) NOT NULL,
+  `ID` bigint(20) NOT NULL,
+  `idUser` bigint(20) NOT NULL,
+  `idPlatform` bigint(20) NOT NULL,
+  `idTask` bigint(20) NOT NULL,
   `sDate` datetime NOT NULL,
   `sLangProg` varchar(30) DEFAULT NULL,
   `sName` varchar(250) NOT NULL,
@@ -10,8 +11,6 @@ CREATE TABLE `tm_source_codes` (
   `iVersion` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `UserTask` (`idUser`,`idTask`),
-  KEY `sLanguage` (`sLangProg`),
   KEY `idTask` (`idTask`),
-  KEY `synchro` (`iVersion`),
-  KEY `sLangProg` (`sLangProg`)
+  KEY `synchro` (`iVersion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8

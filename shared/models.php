@@ -3,69 +3,64 @@
 
 $tablesModels = array (
    "tm_source_codes" => array(
-      "primaryKey" => "id",
       "autoincrementID" => false,
       "fields" => array(
-         "idUser" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "idTask" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "idUser" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "idTask" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
          "sDate" => array("type" => "datetime", "access" => array("write" => array(), "read" => array("user"))),
          "sParams"  => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))),
          "sName"  => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))),
          "sSource"  => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))),
-         "bEditable" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "bEditable" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
       ),
    ),
    "tm_submissions" => array(
-      "primaryKey" => "id",
       "autoincrementID" => false,
       "fields" => array(
-         "idUser" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "idTask" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "idUser" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "idTask" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
          "sDate" => array("type" => "datetime", "access" => array("write" => array(), "read" => array("user"))),
-         "idSourceCode" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "bManualCorrection" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "iSuccess" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "nbTestsTotal" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "nbTestsPassed" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "iScore" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "bCompilError" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "idSourceCode" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "bManualCorrection" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "iSuccess" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "nbTestsTotal" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "nbTestsPassed" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "iScore" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "bCompilError" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
          "sCompilMsg" => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))), 
          "sErrorMsg" => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))), 
          "sFirstUserOutput" => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))), 
          "sFirstExpectedOutput" => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))), 
          "sManualScoreDiffComment" => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))), 
-         "bEvaluated" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "bEvaluated" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
          "sMode" => array("type" => "enum", "access" => array("write" => array(), "read" => array("user"))),
-         "iChecksum" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "idPlatform" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "iChecksum" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "idPlatform" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
       ),
    ),   
    "tm_submissions_subtasks" => array(
-      "primaryKey" => "id",
       "autoincrementID" => false,
       "fields" => array(
-         "iSuccess" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "iScore" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "idSubtask" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "idSubmission"  => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "iSuccess" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "iScore" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "idSubtask" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "idSubmission"  => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
       ),
    ),
    "tm_submissions_tests" => array(
-      "primaryKey" => "id",
       "autoincrementID" => false,
       "fields" => array(
-         "idSubmission" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "idTest" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "iScore" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "iTimeMs" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "iErrorCode" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "idSubmission" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "idTest" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "iScore" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "iTimeMs" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "iErrorCode" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
          "sOutput" => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))),
          "sExpectedOutput" => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))),
-         "idSubmissionSubtask" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "idSubmissionSubtask" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
       ),
    ),
    "tm_tasks" => array(
-      "primaryKey" => "id",
       "autoincrementID" => false,
       "hasHistory" => false,
       "fields" => array(
@@ -76,23 +71,22 @@ $tablesModels = array (
       "primaryKey" => "id",
       "autoincrementID" => false,
       "fields" => array(
-         "idTask" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "idTask" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
          "name" => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))),
          "comments" => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))),
-         "iPointsMax" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "weighting" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "iRank" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "iPointsMax" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "weighting" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "iRank" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
       )
    ),
    "tm_tasks_tests" => array(
-      "primaryKey" => "id",
       "autoincrementID" => false,
       "fields" => array(
-         "idTask" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "idTask" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
          "sGroupType" => array("type" => "enum", "access" => array("write" => array(), "read" => array("user"))),
          "sOutput3" => array("type" => "string", "access" => array("write" => array(), "read" => array("user"))),
-         "iRank" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
-         "idSubtask" => array("type" => "INT", "access" => array("write" => array(), "read" => array("user"))),
+         "iRank" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
+         "idSubtask" => array("type" => "int", "access" => array("write" => array(), "read" => array("user"))),
       )
    )
 );
@@ -103,7 +97,7 @@ $viewModels['byIdSubmission'] = array (
    "tm_source_codes" => array (
       "mainTable" => "tm_source_codes",
       "joins" => array (
-         "tm_submissions" => array ("srcTable" => "tm_source_codes", "srcField" => "id", "dstField" => "idSourceCode")
+         "tm_submissions" => array ("srcTable" => "tm_source_codes", "srcField" => "ID", "dstField" => "idSourceCode")
          ),
       "fields" => array(
          "idUser" => array(),
@@ -136,7 +130,7 @@ $viewModels['byIdSubmission'] = array (
       "filters" => array (
          "idSubmission" => array (
             "joins" => array ("tm_submissions"),
-            "condition" => "`[PREFIX]tm_submissions`.`id` = :[PREFIX_FIELD]idSubmission"
+            "condition" => "`[PREFIX]tm_submissions`.`ID` = :[PREFIX_FIELD]idSubmission"
          )
       ),
    ),
@@ -156,7 +150,7 @@ $viewModels['byIdSubmission'] = array (
       "filters" => array (
          "idSubmission" => array (
             "joins" => array ("tm_submissions"),
-            "condition" => "`[PREFIX]tm_submissions`.`id` = :[PREFIX_FIELD]idSubmission"
+            "condition" => "`[PREFIX]tm_submissions`.`ID` = :[PREFIX_FIELD]idSubmission"
          )
       ),
    ),
@@ -164,7 +158,7 @@ $viewModels['byIdSubmission'] = array (
    "tm_submissions" => array (
       "mainTable" => "tm_submissions",
          "joins" => array (
-            "tm_tasks" => array("srcTable" => "tm_submissions", "srcField" => "idTask", "dstField" => "id")
+            "tm_tasks" => array("srcTable" => "tm_submissions", "srcField" => "idTask", "dstField" => "ID")
          ),
       "fields" => array (
          "idUser" => array(),
@@ -192,7 +186,7 @@ $viewModels['byIdSubmission'] = array (
    "tm_submissions_tests" => array (
       "mainTable" => "tm_submissions_tests",
       "joins" => array (
-         "tm_tasks_tests" => array ("srcTable" => "tm_submissions_tests", "srcField" => "idTest", "dstField" => "id")
+         "tm_tasks_tests" => array ("srcTable" => "tm_submissions_tests", "srcField" => "idTest", "dstField" => "ID")
          ),
       "fields" => array(
          "idSubmission" => array(),
@@ -236,7 +230,7 @@ $viewModels['byTimeSubmission'] = array (
    "tm_source_codes" => array (
       "mainTable" => "tm_source_codes",
       "joins" => array (
-         "tm_submissions" => array ("srcTable" => "tm_source_codes", "srcField" => "id", "dstField" => "idSourceCode")
+         "tm_submissions" => array ("srcTable" => "tm_source_codes", "srcField" => "ID", "dstField" => "idSourceCode")
          ),
       "fields" => array(
          "idUser" => array(),
@@ -299,7 +293,7 @@ $viewModels['byTimeSubmission'] = array (
    "tm_submissions" => array (
       "mainTable" => "tm_submissions",
          "joins" => array (
-            "tm_tasks" => array("srcTable" => "tm_submissions", "srcField" => "idTask", "dstField" => "id")
+            "tm_tasks" => array("srcTable" => "tm_submissions", "srcField" => "idTask", "dstField" => "ID")
          ),
       "fields" => array (
          "idUser" => array(),
@@ -334,8 +328,8 @@ $viewModels['byTimeSubmission'] = array (
    "tm_submissions_tests" => array (
       "mainTable" => "tm_submissions_tests",
       "joins" => array (
-         "tm_tasks_tests" => array ("srcTable" => "tm_submissions_tests", "srcField" => "idTest", "dstField" => "id"),
-         "tm_submissions" => array ("srcTable" => "tm_submissions_tests", "srcField" => "idSubmission", "dstField" => "id")
+         "tm_tasks_tests" => array ("srcTable" => "tm_submissions_tests", "srcField" => "idTest", "dstField" => "ID"),
+         "tm_submissions" => array ("srcTable" => "tm_submissions_tests", "srcField" => "idSubmission", "dstField" => "ID")
          ),
       "fields" => array(
          "idSubmission" => array(),
@@ -387,6 +381,3 @@ $viewModels['byTimeSubmission'] = array (
       )
    ),
 );
-         
-
-?>

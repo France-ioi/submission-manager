@@ -2,7 +2,11 @@
 
 ### Installation
 
-Copy `config_local_template.php` to `config_local.php` and fill it. Run
+Copy `config_local_template.php` to `config_local.php` and fill it.
+
+Visit `dbv/index.php` (login/password in `dbv/config.php`) and apply schema and revisions.
+
+Run
 
     php commonFramework/modelsManager/triggers.php
 

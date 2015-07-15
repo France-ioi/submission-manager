@@ -2,11 +2,10 @@ var models =
 {
    tm_source_codes:
    {
-      primaryKey: "id",
       fields:
       {
-         idUser: {type : "int"},
-         idTask: {type : "int"},
+         idUser: {type : "key"},
+         idTask: {type : "key"},
          sDate: {type : "jsdate"},
          sParams: {type : "string"},
          sName: {type : "string"},
@@ -16,11 +15,10 @@ var models =
    },
    tm_submissions:
    {
-      primaryKey: "id",
       fields:
       {
-         idUser: {type : "int"},
-         idTask: {type : "int"},
+         idUser: {type : "key"},
+         idTask: {type : "key"},
          sDate: {type: "jsdate"},
          idSourceCode: {type : "key", refModel : "tm_source_codes", link: "sourceCode"},
          bManualCorrection: {type : "int"},
@@ -37,7 +35,6 @@ var models =
          bEvaluated: {type : "int"},
          sMode: {type: "enum"},
          iChecksum: {type : "int"},
-         idPlatform: {type : "int"},
          task_sScriptAnimation: {type : "string"}
       },
       links:
@@ -48,12 +45,11 @@ var models =
    },
    tm_submissions_subtasks:
    {
-      primaryKey: "id",
       fields:
       {
          iSuccess: {type : "int"},
          iScore: {type : "int"},
-         idSubtask: {type : "int"},
+         idSubtask: {type : "key"},
          idSubmission: {type : "key", invLink: "submissionSubtasks", refModel: "tm_submissions"},
          subtask_idTask: {type: "int"},
          subtask_name: {type: "string"},
@@ -68,12 +64,10 @@ var models =
    },
    tm_submissions_tests:
    {
-      primaryKey: "id",
       fields:
       {
-         id: {type : "int"},
          idSubmission: {type : "key", invLink: "tests", refModel: "tm_submissions", },
-         idTest: {type : "int"},
+         idTest: {type : "key"},
          iScore: {type : "int"},
          iTimeMs: {type : "int"}, 
          iErrorCode: {type : "int"},
@@ -90,23 +84,21 @@ var models =
    /*
    tm_tasks_tests:
    {
-      primaryKey: "id",
       fields:
       {
-         idTask: {type: "int"},
+         idTask: {type: "key"},
          sGroupType: {type: "enum"},
          sOutput3: {type: "string"},
          iRank: {type: "int"},
-         idSubtask: {type: "int"}
+         idSubtask: {type: "key"}
       }
    },
    */
    /*tm_tasks_subtasks:
    {
-      primaryKey: "id",
       fields:
       {
-         idTask: {type: "int"},
+         idTask: {type: "key"},
          name: {type: "string"},
          comments: {type: "string"},
          iPointsMax: {type: "int"},
