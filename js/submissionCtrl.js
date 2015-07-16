@@ -1,4 +1,4 @@
-var submission = angular.module('submission', ['ui.bootstrap', 'ngRoute']);
+var submission = angular.module('submission', ['ui.bootstrap']);
 
 submission.directive('animation', function()
 {
@@ -15,10 +15,12 @@ submission.directive('animation', function()
          
          var hasLoadedSimulation = new Array();
          hasLoadedSimulation[$scope.idtest] = false;
-         console.error($scope.commands);
-         $scope.commands = $.parseJSON($scope.commands);
+         try {
+            $scope.commands = $.parseJSON($scope.commands);
+         } catch(e) {
+            console.error('can\'t parse '+$scope.commands);
+         }
          var selector = '#anim' + $scope.idtest + '';
-         
          
          $scope.$on("clickOnTest", function (event, args) 
          {
@@ -56,12 +58,12 @@ function addScript (str)
    $('head').append('<script type="text/javascript">' + str + '</script>');
 }
 
-submission.controller('submissionCtrl', ['$scope', '$sce', '$location', function($scope, $sce, $location)
+submission.controller('submissionCtrl', ['$scope', '$sce', function($scope, $sce)
 {
 	$scope.submissionManager = submissionManager;
    $scope.submissionManager.initConstants($scope);
    
-   var urlDatas = $location.absUrl().split('?')[1];
+   var urlDatas = window.location.href.split('?')[1];// TODO: cleanup, more generic
    $scope.curSubmission = urlDatas.split('&')[0].split('=')[1];
    $scope.showSubmission = urlDatas.split('&')[1].split('=')[1];
    heightManager.urlFrom = urlDatas.split('&')[2].split('=')[1];
@@ -115,8 +117,6 @@ submission.controller('submissionCtrl', ['$scope', '$sce', '$location', function
          }
 
       }
-      
-      console.log($scope.submission);
       
       $scope.loading = false;
       $scope.$apply();

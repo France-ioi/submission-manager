@@ -9,12 +9,15 @@
       <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="stext/css" rel="stylesheet">
       <script src="js/get_height_submission.js"></script>
    </head>
-   
    <body>
       <div>
          <h1>Résultats de la soumission</h1>
-         <iframe id="submission14228370934757056" class="submission_iframe" scrolling="no" src="submission_template.html?curSubmission=14228370934757056&amp;showSubmission=false&amp;urlfrom=view.html">
-         </iframe>
+         <div id="iframeContainer"></div>
+         <script>
+            var idTask = '14228370934757056'; // XXX: change it!
+            var thisUrl = window.location.href;
+            $("#iframeContainer").html('<iframe id="submission'+idTask+'" class="submission_iframe" scrolling="no" src="submission_template.html?curSubmission='+idTask+'&amp;showSubmission=false&amp;parentUrl='+thisUrl+'"></iframe>');
+         </script>
       </div>
    </body>
 </html>

@@ -24,21 +24,16 @@ var heightManager = {
 	canCheckHeight: true,
 	checkHeight: function(idSubmission)
 	{
-		this.idSubmission = idSubmission;
-		this.submissionGlobal = $('.submission_global');
-		this.idTag = 'submission' + idSubmission;
-		$('.submission_global').resize(function(e) // We don't use $('body') to prevent errors, mainly on google chrome
-		{
-			if (this.canCheckHeight)
-			{
-				heightManager.sendMessage(true);
-			}
-		});
+		heightManager.idSubmission = idSubmission;
+		heightManager.submissionGlobal = $('.submission_global');
+		heightManager.idTag = 'submission' + idSubmission;
+	   heightManager.sendMessage();
+		$('.submission_global').resize(heightManager.sendMessage);
+		setInterval(heightManager.sendMessage, 500);
 	},
-	sendMessage: function(isFixedHeight)
+	sendMessage: function()
 	{
-		var height = (isFixedHeight) ? $('.submission_global').css('height') : -1;
-
-		$.postMessage({id: this.idTag, height: height}, completeUrl + this.urlFrom, parent);
-	}		
+		var height = $('.submission_global').outerHeight(true);
+		$.postMessage({id: heightManager.idTag, height: height}, heightManager.urlFrom, parent);
+	}
 };
