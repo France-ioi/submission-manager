@@ -5,19 +5,24 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <title>Vue des résultats d'une soumission</title>
       <script src="bower_components/jquery/dist/jquery.min.js"></script>
-      <link href="style.css" type="text/css" rel="stylesheet">
-      <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="stext/css" rel="stylesheet">
       <script src="js/get_height_submission.js"></script>
+      <style>
+         .submission_iframe
+         {
+            border: none;
+            overflow: hidden;
+            width: 100%;
+            height: 0px;
+         }
+      </style>
    </head>
    <body>
-      <div>
-         <h1>Résultats de la soumission</h1>
-         <div id="iframeContainer"></div>
-         <script>
-            var idTask = '14228370934757056'; // XXX: change it!
-            var thisUrl = window.location.href;
-            $("#iframeContainer").html('<iframe id="submission'+idTask+'" class="submission_iframe" scrolling="no" src="submission_template.html?curSubmission='+idTask+'&amp;showSubmission=false&amp;parentUrl='+thisUrl+'"></iframe>');
-         </script>
-      </div>
+      <h1>Résultats de la soumission</h1>
+      <div id="iframeContainer"></div>
+      <script>
+         var idTask = '14228370934757056'; // XXX: change it!
+         var thisUrl = window.location.href;
+         $("#iframeContainer").html('<iframe id="submission'+idTask+'" class="submission_iframe" scrolling="no" src="submission_template.html?curSubmission='+idTask+'&amp;showSubmission=false&amp;parentUrl='+thisUrl+'"></iframe>');
+      </script>
    </body>
 </html>

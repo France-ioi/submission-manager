@@ -21,19 +21,24 @@ var heightManager = {
 	idTag: undefined,
 	submissionGlobal: undefined,
 	urlFrom: undefined,
-	canCheckHeight: true,
+	lastSentHeight: undefined,
 	checkHeight: function(idSubmission)
 	{
 		heightManager.idSubmission = idSubmission;
 		heightManager.submissionGlobal = $('.submission_global');
 		heightManager.idTag = 'submission' + idSubmission;
-	   heightManager.sendMessage();
-		$('.submission_global').resize(heightManager.sendMessage);
-		setInterval(heightManager.sendMessage, 500);
+	   heightManager.doCheckHeight();
+		setInterval(heightManager.doCheckHeight, 350);
 	},
-	sendMessage: function()
-	{
+	doCheckHeight: function() {
 		var height = $('.submission_global').outerHeight(true);
+		if (height != heightManager.lastSentHeight) {
+		   heightManager.sendMessage(height);
+		}
+		heightManager.lastSentHeight = height;
+	},
+	sendMessage: function(height)
+	{
 		$.postMessage({id: heightManager.idTag, height: height}, heightManager.urlFrom, parent);
 	}
 };

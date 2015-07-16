@@ -1,13 +1,3 @@
-/* iFrame */
-
-.submission_iframe
-{
-   border: none;
-   overflow: hidden;
-   width: 100%;
-   height: 0px;
-}
-
 /* Bootstrap modifications and global style */
 
 .nav, .pagination, .carousel, .panel-title a, .panel-heading { cursor: pointer; }
