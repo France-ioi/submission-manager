@@ -132,7 +132,20 @@ submission.controller('submissionCtrl', ['$scope', '$sce', function($scope, $sce
    });
    SyncQueue.sync();
    setInterval(SyncQueue.planToSend, 5000);
-   
+
+   function expandSourceCodeParams(sourceCode) {
+      if (sourceCode.sParams && typeof sourceCode.sParams == 'string') {
+         try {
+            sourceCode.sParams = $.parseJSON(sourceCode.sParams);
+         } catch(e) {
+            console.error('couldn\'t parse '+sourceCode.sParams);
+         }
+      }
+   }
+
+   ModelsManager.addListener('tm_source_codes', "inserted", 'submissionCtrl', expandSourceCodeParams);
+   ModelsManager.addListener('tm_source_codes', "updated", 'submissionCtrl', expandSourceCodeParams);
+
    $scope.updateSubmission = function() { 
       $scope.hasLoadedAnimation = false;
       $scope.loading = true;    

@@ -25,6 +25,11 @@
    text-decoration: none !important;
 }
 
+.submission_global a:focus
+{
+   text-decoration: none !important;
+}
+
 .submission_global .panel-group .panel-heading
 {
    background-color: #D3D3D3;

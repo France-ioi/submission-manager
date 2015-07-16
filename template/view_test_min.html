@@ -1,2 +1,2 @@
-<span class="imageTest" ng-include src="'image_test.html'"></span>
-
+<span ng-if="curTest.iScore == 0 || curTest.iScore == 100" class="imageTest" ng-class="submissionManager.getClassImageTest(curTest.iErrorCode)"></span>
+<span ng-if="!(curTest.iScore == 0 || curTest.iScore == 100)" class="imageTest" ng-class="submissionManager.getClassImageTest(ERROR_RelativeScore)"></span>

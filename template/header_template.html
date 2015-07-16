@@ -1,8 +1,3 @@
-<script type="text/ng-template" id="image_test.html">
-   <span ng-if="curTest.iScore == 0 || curTest.iScore == 100" class="{{submissionManager.getClassImageTest(curTest.iErrorCode)}}"></span>
-   <span ng-if="!(curTest.iScore == 0 || curTest.iScore == 100)" class="{{submissionManager.getClassImageTest(ERROR_RelativeScore)}}"></span>
-</script>
-
 <div class="submission" ng-if="submission != undefined && !loading && hasAskedSubmission">
 	<span class="submission_span submission_info">
 	   <span class="glyphicon glyphicon-ok image_succeed_task checkImage" ng-show="submission.iSuccess == 1"></span>
