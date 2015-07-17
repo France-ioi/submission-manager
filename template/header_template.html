@@ -1,4 +1,4 @@
-<div class="submission" ng-if="submission != undefined && !loading && hasAskedSubmission">
+<div class="submission" ng-if="!loading">
 	<span class="submission_span submission_info">
 	   <span class="glyphicon glyphicon-ok image_succeed_task checkImage" ng-show="submission.iSuccess == 1"></span>
 	   <span class="glyphicon glyphicon-remove image_failure_task checkImage" ng-show="!(submission.iSuccess == 1)"></span>
@@ -12,13 +12,13 @@
  
 	<br />
 	   
-	<span class="submission_details">    
+	<span class="submission_details">
 	   <span ng-if="submission.submissionSubtasks.length > 0">Sous-tâches validées : {{submissionManager.countSubtasksSucceeded(submission)}} / {{submission.submissionSubtasks.length}}</span>
-	   <span ng-if="submission.submissionSubtasks.length == 0">Test validés : {{submission.nbTestsPassed}} / {{submission.nbTestsTotal}}</span>    			
+	   <span ng-if="submission.submissionSubtasks.length == 0">Test validés : {{submission.nbTestsPassed}} / {{submission.nbTestsTotal}}</span>
 	   &nbsp;&nbsp;
-	   <span class="submission_min_test disp_min" ng-if="submission.submissionSubtasks.length == 0" ng-repeat="curTest in submission.tests" ng-include src="'template/view_test_min.html'"></span>
-	   <span class="submission_min_test" ng-if="submission.submissionSubtasks.length > 0" ng-repeat="submissionSubtask in submission.submissionSubtasks">
-		  <span ng-repeat="curTest in submissionSubtask.submissionTests" ng-include src="'template/view_test_min.html'"  class="disp_min"></span>
+	   <span class="submission_min_test disp_min" ng-if="!submission.submissionSubtasks" ng-repeat="curTest in submission.tests" ng-include src="'submission-manager/template/view_test_min.html'"></span>
+	   <span class="submission_min_test" ng-if="submission.submissionSubtasks" ng-repeat="submissionSubtask in submission.submissionSubtasks">
+		  <span ng-repeat="curTest in submissionSubtask.submissionTests" ng-include src="'submission-manager/template/view_test_min.html'"  class="disp_min"></span>
 		  &nbsp;&nbsp;
 	   </span>
 	</span>

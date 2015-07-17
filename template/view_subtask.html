@@ -10,7 +10,7 @@
 			<span>
 				Tests validés : {{countTestsSucceeded(submissionSubtask)}} / {{submissionSubtask.submissionTests.length}}
 				<span class="subtask_min_test">
-					<span ng-repeat="curTest in submissionSubtask.submissionTests" ng-include src="'template/view_test_min.html'"  class="disp_min"></span>
+					<span ng-repeat="curTest in submissionSubtask.submissionTests" ng-include src="'submission-manager/template/view_test_min.html'"  class="disp_min"></span>
 				</span>
 			</span>
 		</span>
@@ -19,13 +19,12 @@
 			Score : {{round(submissionSubtask.iScore * submissionSubtask.subtask_iPointsMax / 100)}} / {{submissionSubtask.subtask_iPointsMax}}
 		</span>
 	</div>
-
 </accordion-heading>
 
 <div class="test">
 	<accordion close-others="true">
 		<accordion-group ng-repeat="curTest in submissionSubtask.submissionTests" is-open="curTest.cached.isShown">
-			<div ng-include src="'template/view_test.html'"></div>
+			<div ng-include src="'submission-manager/template/view_test.html'"></div>
 		</accordion-group>
 	</accordion>
 </div>

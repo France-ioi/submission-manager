@@ -19,7 +19,6 @@ app.directive('animation', function()
             console.error('can\'t parse '+$scope.commands);
          }
          var selector = '#anim' + $scope.idtest + '';
-         
          $scope.$on("clickOnTest", function (event, args) 
          {
             if (args[0] == $scope.idtest && !hasLoadedSimulation[$scope.idtest])
@@ -56,29 +55,42 @@ app.controller('submissionController', ['$scope', '$sce', function($scope, $sce)
    $scope.submissionManager = submissionManager;
    $scope.submissionManager.initConstants($scope);
 
-   $scope.showSubmission = ($scope.showSubmission == 'true') ? true : false; // To prevent errors between strings and booleans
+//   $scope.loading = true;
 
-   $scope.loading = true;
-
-   $scope.hasAskedSubmission = false;
-   $scope.idShown = -1;
+//   $scope.hasAskedSubmission = false;
+//   $scope.idShown = -1;
    
-   $scope.submission = new Array();
-   $scope.submission.subtasks = new Array();
+//   $scope.submission = new Array();
+//   $scope.submission.subtasks = new Array();
    $scope.showDetailsTests = false; // Used when there are no subtasks.
    $scope.hasLoadedAnim = false;
 
-   $scope.updateSubmission = function() { 
-      $scope.hasLoadedAnimation = false;
-      $scope.loading = true;    
-      $scope.hasAskedSubmission = true;
-      $scope.submission = undefined;// We remove all previous datas
-      SyncQueue.params["idSubmission"] = $scope.curSubmission;
-      SyncQueue.serverVersion = 0;
-      SyncQueue.planToSend();
-   }
-   
-   $scope.updateSubmission();
+   SyncQueue.addSyncEndListeners("submissionController.apply", function () {
+      if ($scope.submission != undefined) 
+      {
+         var idShown = $scope.initDetailsTests($scope.submission);
+         if (idShown != -1)
+         {
+            $scope.idShown = idShown;
+         }
+         $scope.configureLogsError($scope.submission.tests);
+         if ($scope.submission.task_sScriptAnimation != '' && !$scope.hasLoadedAnimation)
+         {
+            $scope.hasLoadedAnimation = true;
+            addScript($scope.submission.task_sScriptAnimation); // TODO: use eval instead?
+         }
+      }
+      $scope.loading = false;
+      $scope.$apply();
+
+      if ($scope.idShown != -1 && $scope.submission != undefined)
+      {
+         if ($scope.submission.task_sScriptAnimation != '')
+         {
+            $scope.$broadcast("clickOnTest", [$scope.idShown]);
+         }
+      }
+   });
 
    $scope.displayError = function (index)
    {
@@ -119,7 +131,8 @@ app.controller('submissionController', ['$scope', '$sce', function($scope, $sce)
    {
       var idApplied = -1;
       // If there are subtasks in this problem
-      if (submission.submissionSubtasks.length > 0)
+      console.error(submission);
+      if (submission.submissionSubtasks && submission.submissionSubtasks.length > 0)
       {
          var subtasks = submission.submissionSubtasks;
          var hasFoundAnError = false;
