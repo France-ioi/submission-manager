@@ -1,6 +1,4 @@
-var submission = angular.module('submission', ['ui.bootstrap']);
-
-submission.directive('animation', function()
+app.directive('animation', function()
 {
    return {
       restrict: 'EA',
@@ -35,8 +33,6 @@ submission.directive('animation', function()
                      //});
                   //});
                //});
-            
-            
                }, 1);*/
                if (typeof anumationFeatures !== 'undefined') {
                   simulationInstance(selector, animationFeatures(selector), $scope.commands);
@@ -44,107 +40,33 @@ submission.directive('animation', function()
                $('.restart').trigger('click');
             }
          });
-         
-
-         
-         
       },
-      templateUrl: 'animations/anim.html'
+      templateUrl: 'submission-manager/animations/anim.html'
    };
 });
 
+// TODO: use eval
 function addScript (str)
 {
    $('head').append('<script type="text/javascript">' + str + '</script>');
 }
 
-submission.controller('submissionCtrl', ['$scope', '$sce', function($scope, $sce)
+app.controller('submissionController', ['$scope', '$sce', function($scope, $sce)
 {
-	$scope.submissionManager = submissionManager;
+   $scope.submissionManager = submissionManager;
    $scope.submissionManager.initConstants($scope);
-   
-   var urlDatas = window.location.href.split('?')[1];// TODO: cleanup, more generic
-   $scope.curSubmission = urlDatas.split('&')[0].split('=')[1];
-   $scope.showSubmission = urlDatas.split('&')[1].split('=')[1];
-   heightManager.urlFrom = urlDatas.split('&')[2].split('=')[1];
-   
+
    $scope.showSubmission = ($scope.showSubmission == 'true') ? true : false; // To prevent errors between strings and booleans
 
    $scope.loading = true;
 
-   heightManager.checkHeight($scope.curSubmission);
-
    $scope.hasAskedSubmission = false;
-      
    $scope.idShown = -1;
    
    $scope.submission = new Array();
    $scope.submission.subtasks = new Array();
    $scope.showDetailsTests = false; // Used when there are no subtasks.
    $scope.hasLoadedAnim = false;
-      
-   ModelsManager.init(models);
-   SyncQueue.init(ModelsManager);
-
-   SyncQueue.params["idSubmission"] = $scope.curSubmission;
-   
-   SyncQueue.addSyncEndListeners("SubmissionCtrl.apply", function ()
-   {
-      if (!$scope.hasAskedSubmission)
-      {
-         return;
-      }
-      $scope.loading = true;
-      $scope.idTestToLog = -1;
-      $scope.submission = ModelsManager.getRecord('tm_submissions', $scope.curSubmission);
-      
-      
-      
-      if ($scope.submission != undefined) 
-      {
-         var idShown = $scope.initDetailsTests($scope.submission);
-         if (idShown != -1)
-         {
-            $scope.idShown = idShown;
-         }
-         $scope.configureLogsError($scope.submission.tests);
-                  
-         if ($scope.submission.task_sScriptAnimation != '' && !$scope.hasLoadedAnimation)
-         {
-            $.getScript('animations/animation.js'); // TODO: load anyway?
-            $scope.hasLoadedAnimation = true;
-            addScript($scope.submission.task_sScriptAnimation); // TODO: use eval instead?
-         }
-
-      }
-      
-      $scope.loading = false;
-      $scope.$apply();
-
-      if ($scope.idShown != -1 && $scope.submission != undefined)
-      {
-         if ($scope.submission.task_sScriptAnimation != '')
-         {
-            $scope.$broadcast("clickOnTest", [$scope.idShown]);
-         }
-      }
-
-   });
-   SyncQueue.sync();
-   setInterval(SyncQueue.planToSend, 5000);
-
-   function expandSourceCodeParams(sourceCode) {
-      if (sourceCode.sParams && typeof sourceCode.sParams == 'string') {
-         try {
-            sourceCode.sParams = $.parseJSON(sourceCode.sParams);
-         } catch(e) {
-            console.error('couldn\'t parse '+sourceCode.sParams);
-         }
-      }
-   }
-
-   ModelsManager.addListener('tm_source_codes', "inserted", 'submissionCtrl', expandSourceCodeParams);
-   ModelsManager.addListener('tm_source_codes', "updated", 'submissionCtrl', expandSourceCodeParams);
 
    $scope.updateSubmission = function() { 
       $scope.hasLoadedAnimation = false;
@@ -158,11 +80,6 @@ submission.controller('submissionCtrl', ['$scope', '$sce', function($scope, $sce
    
    $scope.updateSubmission();
 
-   $scope.aler = function(str)
-   {
-      alert(str);
-   }
-   
    $scope.displayError = function (index)
    {
       if ($scope.idTestToLog == -1 || $scope.idTestToLog == index)
@@ -186,7 +103,7 @@ submission.controller('submissionCtrl', ['$scope', '$sce', function($scope, $sce
    }
    
    $scope.countTestsSucceeded = function(curSubtask)
-   {      
+   {
       var nbTestsSucceeded = 0;
       for (var iTest = 0; iTest < curSubtask.submissionTests.length; iTest++)
       {
