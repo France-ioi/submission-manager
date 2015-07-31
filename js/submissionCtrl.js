@@ -1,4 +1,6 @@
-app.directive('animation', function()
+angular.module('submission-manager', []);
+
+angular.module('submission-manager').directive('animation', function()
 {
    return {
       restrict: 'EA',
@@ -50,7 +52,7 @@ function addScript (str)
    $('head').append('<script type="text/javascript">' + str + '</script>');
 }
 
-app.controller('submissionController', ['$scope', '$sce', function($scope, $sce)
+angular.module('submission-manager').controller('submissionController', ['$scope', '$sce', function($scope, $sce)
 {
    $scope.submissionManager = submissionManager;
    $scope.submissionManager.initConstants($scope);
