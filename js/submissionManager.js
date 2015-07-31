@@ -154,7 +154,4 @@ var submissionManager = {
       //alert(submissionManager.getDataTest(iErrorCode).classImage);
       return submissionManager.getDataTest(iErrorCode).classImage;
    }
-
-
-
 };
