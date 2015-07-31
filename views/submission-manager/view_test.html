@@ -1,17 +1,16 @@
 <accordion-heading>
    <p ng-click="clickTest(curTest.id)" ng-if="curTest.iScore > 0 && curTest.iScore < 100" class="heading_test"> <!-- i.e relative score -->
       <span class="idTest">
-         <span ng-include src="'image_test.html'" class="imageTest"></span>
+         <span ng-include src="'submission-manager/image_test.html'" class="imageTest"></span>
          Test n°{{$index+1}} &nbsp; &nbsp;
       </span>
       <span class="resultTest {{submissionManager.getClassTest(ERROR_RelativeScore)}}">
          Score partiel de {{curTest.iScore}}% en {{floor(curTest.iTimeMs/10)/100}} s
       </span>
-   
    </p>
    <p ng-click="clickTest(curTest.id)" ng-if="!(curTest.iScore > 0 && curTest.iScore < 100)" ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)" class="heading_test">
       <span class="idTest">
-         <span ng-include src="'image_test.html'" class="imageTest"></span> 
+         <span ng-include src="'submission-manager/image_test.html'" class="imageTest"></span> 
          Test n°{{$index+1}} &nbsp; &nbsp;
       </span>
       <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="ok">

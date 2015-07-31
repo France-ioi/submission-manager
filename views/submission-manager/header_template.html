@@ -16,9 +16,9 @@
 	   <span ng-if="submission.submissionSubtasks.length > 0">Sous-tâches validées : {{submissionManager.countSubtasksSucceeded(submission)}} / {{submission.submissionSubtasks.length}}</span>
 	   <span ng-if="submission.submissionSubtasks.length == 0">Test validés : {{submission.nbTestsPassed}} / {{submission.nbTestsTotal}}</span>
 	   &nbsp;&nbsp;
-	   <span class="submission_min_test disp_min" ng-if="!submission.submissionSubtasks" ng-repeat="curTest in submission.tests" ng-include src="'submission-manager/template/view_test_min.html'"></span>
+	   <span class="submission_min_test disp_min" ng-if="!submission.submissionSubtasks" ng-repeat="curTest in submission.tests" ng-include src="'submission-manager/view_test_min.html'"></span>
 	   <span class="submission_min_test" ng-if="submission.submissionSubtasks" ng-repeat="submissionSubtask in submission.submissionSubtasks">
-		  <span ng-repeat="curTest in submissionSubtask.submissionTests" ng-include src="'submission-manager/template/view_test_min.html'"  class="disp_min"></span>
+		  <span ng-repeat="curTest in submissionSubtask.submissionTests" ng-include src="'submission-manager/view_test_min.html'"  class="disp_min"></span>
 		  &nbsp;&nbsp;
 	   </span>
 	</span>
