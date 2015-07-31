@@ -13,6 +13,10 @@
     "test",
     "tests"
   ],
+  "main": [
+    "dst/submission-manager.min.js",
+    "dst/submission-manager.min.css"
+  ],
   "dependencies": {
     "jquery": "~2.1.4",
     "raphael": "~2.1.4",
