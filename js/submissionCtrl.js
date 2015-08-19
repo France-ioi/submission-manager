@@ -76,7 +76,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
             $scope.idShown = idShown;
          }
          $scope.configureLogsError($scope.submission.tests);
-         if ($scope.submission.task_sScriptAnimation != '' && !$scope.hasLoadedAnimation)
+         if ($scope.submission.task_sScriptAnimation && !$scope.hasLoadedAnimation)
          {
             $scope.hasLoadedAnimation = true;
             addScript($scope.submission.task_sScriptAnimation); // TODO: use eval instead?
