@@ -209,6 +209,10 @@
    color: #0DC811;
 }
 
+.image_loading {
+   color: #3366FF;
+}
+
 .error_test
 {
    background-color: #D5111B;

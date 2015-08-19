@@ -1,18 +1,20 @@
 <div class="submission" ng-if="!loading">
 	<span class="submission_span submission_info">
-	   <span class="glyphicon glyphicon-ok image_succeed_task checkImage" ng-show="submission.iSuccess == 1"></span>
-	   <span class="glyphicon glyphicon-remove image_failure_task checkImage" ng-show="!(submission.iSuccess == 1)"></span>
+	   <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate image_loading checkImage" ng-show="!submission.bEvaluated"></span>
+	   <span class="glyphicon glyphicon-ok image_succeed_task checkImage" ng-show="submission.bEvaluated && submission.iSuccess == 1"></span>
+	   <span class="glyphicon glyphicon-remove image_failure_task checkImage" ng-show="submission.bEvaluated && !submission.iSuccess"></span>
 	   Soumission en {{submission.sourceCode.sParams.sLangProg}}
 	   le {{submission.sDate | date:'dd/MM/yyyy à HH:mm'}}
 	</span>
 	
-	<span class="submission_span submission_data"> <!-- centered datas -->
+	<span class="submission_span submission_data"> <!-- centered data -->
 	</span>
-	<span class="submission_span score">Score : {{submission.iScore}} / 100</span>
- 
-	<br />
+	<span class="submission_span score" ng-if="submission.bEvaluated">Score : {{submission.iScore}} / 100</span>
+	<span class="submission_span score" ng-if="!submission.bEvaluated">Évaluation en cours...</span>
+
+	<br>
 	   
-	<span class="submission_details">
+	<span class="submission_details" ng-if="submission.bEvaluated">
 	   <span ng-if="submission.submissionSubtasks.length > 0">Sous-tâches validées : {{submissionManager.countSubtasksSucceeded(submission)}} / {{submission.submissionSubtasks.length}}</span>
 	   <span ng-if="submission.submissionSubtasks.length == 0">Test validés : {{submission.nbTestsPassed}} / {{submission.nbTestsTotal}}</span>
 	   &nbsp;&nbsp;
