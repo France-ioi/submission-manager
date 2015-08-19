@@ -42,7 +42,7 @@ angular.module('submission-manager').directive('animation', function()
             }
          });
       },
-      templateUrl: 'submission-manager/animations/anim.html'
+      templateUrl: 'submission-manager/anim.html'
    };
 });
 
