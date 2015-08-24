@@ -14,8 +14,8 @@
             </div>
             <div ng-if="submission.bEvaluated">
                <div ng-show="submission.bCompilError" class="submission_error">
-                  Erreur de compilation<br />
-                  <pre>{{submission.sCompilMgs}}</pre>
+                  <strong>Erreur de compilation :</strong><br />
+                  <pre>{{submission.sCompilMsg}}</pre>
                </div>
                
                <div ng-show="!(submission.tests.length > 0) && !submission.bCompilError && submission.bEvaluated" class="submission_error">
