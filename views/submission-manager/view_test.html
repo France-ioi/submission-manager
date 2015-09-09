@@ -48,70 +48,76 @@
 
 <div ng-if="curTest.sOutput != '' && hasLoadedAnimation" class="output" animation commands="curTest.sOutput" idtest="curTest.id"></div>
 
-<div ng-if="!(curTest.iScore > 0 && curTest.iScore < 100) && !(curTest.sOutput != '' && hasLoadedAnimation)" class="output" ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)">
-   <span ng-switch-when="ok">
-      Bravo, votre programme a validé ce test. La réponse donnée par votre programme n'est pas affichée pour ne pas révéler d'informations sur nos tests.
-   </span>
-   <span ng-switch-when="error">
-      <span ng-if="displayError(curTest.ID) && curTest.sOutput.length == 0"> <!-- We use datas in tm_submissions to display log errors if there's nothing in tm_submissions_tests -->
-         Votre programme a renvoyé :<br/>
-         <pre class="log">{{submission.sFirstUserOutput}}</pre>
-         
-         Il aurait dû renvoyer :<br/>
-         <pre class="log">{{submission.sFirstExpectedOutput}}</pre>
-         
-         <span ng-show="curTest.iErrorCode == ERROR_WrongAnswer"> <!-- diff shall not be shown when iErrorCode = ERROR_WrongAnswerBis -->
-            Pour vous aider, voici le premier caractère différent : <br />
-            <pre class="log" ng-bind-html="toTrust(firstCharDiff(submission.sFirstUserOutput, submission.sFirstExpectedOutput))"></pre> 
+<div ng-if="!(curTest.iScore > 0 && curTest.iScore < 100) && !(curTest.sOutput != '' && hasLoadedAnimation)" class="output">
+   <div ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)">
+      <span ng-switch-when="ok">
+         Bravo, votre programme a validé ce test. La réponse donnée par votre programme n'est pas affichée pour ne pas révéler d'informations sur nos tests.
+      </span>
+      <span ng-switch-when="error">
+         <span ng-if="displayError(curTest.ID) && curTest.sOutput.length == 0"> <!-- We use datas in tm_submissions to display log errors if there's nothing in tm_submissions_tests -->
+            Votre programme a renvoyé :<br/>
+            <pre class="log">{{submission.sFirstUserOutput}}</pre>
+            
+            Il aurait dû renvoyer :<br/>
+            <pre class="log">{{submission.sFirstExpectedOutput}}</pre>
+            
+            <span ng-show="curTest.iErrorCode == ERROR_WrongAnswer"> <!-- diff shall not be shown when iErrorCode = ERROR_WrongAnswerBis -->
+               Pour vous aider, voici le premier caractère différent : <br />
+               <pre class="log" ng-bind-html="toTrust(firstCharDiff(submission.sFirstUserOutput, submission.sFirstExpectedOutput))"></pre> 
+            </span>
+         </span>
+         <span ng-if="displayError(curTest.ID) && curTest.sOutput.length > 0"> <!-- Otherwise, we use datas in tm_submissions_tests -->
+            Votre programme a renvoyé :<br/>
+            <pre class="log">{{curTest.sOutput}}</pre>
+            
+            Il aurait dû renvoyer :<br/>
+            <pre class="log">{{curTest.sExpectedOutput}}</pre>
+            <span ng-show="curTest.iErrorCode == ERROR_WrongAnswer"> <!-- diff shall not be shown when iErrorCode = ERROR_WrongAnswerBis -->
+               Pour vous aider, voici le premier caractère différent : <br />
+               <pre class="log" ng-bind-html="toTrust(firstCharDiff(curTest.sOutput, curTest.sExpectedOutput))"></pre>
+            </span>
+         </span>
+         <span ng-if="!displayError(curTest.ID)">
+            Aucun log n'est disponible pour ce test.
          </span>
       </span>
-      <span ng-if="displayError(curTest.ID) && curTest.sOutput.length > 0"> <!-- Otherwise, we use datas in tm_submissions_tests -->
-         Votre programme a renvoyé :<br/>
-         <pre class="log">{{curTest.sOutput}}</pre>
-         
-         Il aurait dû renvoyer :<br/>
-         <pre class="log">{{curTest.sExpectedOutput}}</pre>
-         <span ng-show="curTest.iErrorCode == ERROR_WrongAnswer"> <!-- diff shall not be shown when iErrorCode = ERROR_WrongAnswerBis -->
-            Pour vous aider, voici le premier caractère différent : <br />
-            <pre class="log" ng-bind-html="toTrust(firstCharDiff(curTest.sOutput, curTest.sExpectedOutput))"></pre>
-         </span>
+      <span ng-switch-when="errorNoLog">
+         <pre ng-show="displayError(curTest.ID) && curTest.sOutput.length > 0" class="log">{{curTest.sOutput}}</pre>
       </span>
-      <span ng-if="!displayError(curTest.ID)">
-         Aucun log n'est disponible pour ce test.
+      <span ng-switch-when="abort">
+         Votre programme a retourné un <code>Abort</code>.
+         En C++, il peut s'agir d'une exception non traitée par votre programme.
       </span>
-   </span>
-   <span ng-switch-when="errorNoLog">
-      <pre ng-show="displayError(curTest.ID) && curTest.sOutput.length > 0" class="log">{{curTest.sOutput}}</pre>
-   </span>
-   <span ng-switch-when="abort">
-      Votre programme a retourné un abort.
-      En C++, il peut s'agir d'une exception non traitée par votre programme.
-   </span>
-   <span ng-switch-when="busError">
-      Votre programme a retourné un bus Error
-      Il peut s'agir d'un problème lié à l'utilisation de pointeurs.
-   </span>
-   <span ng-switch-when="floatingPointExpression">
-      Votre programme s'est terminé par un "floating point exception".
-      Il a probablement tenté d'effectuer une division par zéro.
-   </span>
-   <span ng-switch-when="memory">
-      Votre programme a échoué à la suite d'un accès mémoire en dehors des zones réservées, ou d'un dépassement de la limite de mémoire.<br />
-      Votre programme s'est terminé à la suite d'une erreur. Cela peut venir d'une des raisons suivantes :
-      <ul>
-         <li>Votre programme a dépassé la limite de mémoire autorisée pour ce problème, que ce soit sous la forme de variables statiques, d'allocations dynamiques, ou bien de la pile.</li>
-         <li>Votre programme a tenté de faire un accès mémoire en dehors des zones allouées.</li>
-      </ul>
-   </span>
-   <span ng-switch-when="timeout">
-      Votre programme a dépassé la limite de temps.<br />
-      Cela peut venir de deux raisons :
-      <ul>
-         <li>soit il est trop lent pour passer ce test dans la limite de temps du sujet.</li>
-         <li>soit il boucle indéfiniment et ne se termine jamais.</li>
-      </ul>
-   </span>
-   <span ng-switch-default>
-      Un problème a eu lieu lors de la récupération des informations concernant le test.
-   </span>
+      <span ng-switch-when="busError">
+         Votre programme a retourné un <code>Bus Error</code>.
+         Il peut s'agir d'un problème lié à l'utilisation de pointeurs.
+      </span>
+      <span ng-switch-when="floatingPointExpression">
+         Votre programme s'est terminé par un <code>floating point exception</code>.
+         Il a probablement tenté d'effectuer une division par zéro.
+      </span>
+      <span ng-switch-when="memory">
+         Votre programme a échoué à la suite d'un accès mémoire en dehors des zones réservées, ou d'un dépassement de la limite de mémoire.<br />
+         Votre programme s'est terminé à la suite d'une erreur. Cela peut venir d'une des raisons suivantes :
+         <ul>
+            <li>Votre programme a dépassé la limite de mémoire autorisée pour ce problème, que ce soit sous la forme de variables statiques, d'allocations dynamiques, ou bien de la pile.</li>
+            <li>Votre programme a tenté de faire un accès mémoire en dehors des zones allouées.</li>
+         </ul>
+      </span>
+      <span ng-switch-when="timeout">
+         Votre programme a dépassé la limite de temps.<br />
+         Cela peut venir de deux raisons :
+         <ul>
+            <li>soit il est trop lent pour passer ce test dans la limite de temps du sujet.</li>
+            <li>soit il boucle indéfiniment et ne se termine jamais.</li>
+         </ul>
+      </span>
+      <span ng-switch-default>
+         Un problème a eu lieu lors de la récupération des informations concernant le test.
+      </span>
+   </div>
+   <div ng-if="curTest.sErrorMsg">
+      Message d'erreur renvoyé à l'évaluation :
+      <pre>{{curTest.sErrorMsg}}</pre>
+   </div>
 </div>
