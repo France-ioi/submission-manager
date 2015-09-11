@@ -37,7 +37,7 @@
                   </div>
                   <div class="test" ng-if="submission.submissionSubtasks.length == 0">
                      <accordion close-others="true">
-                        <accordion-group ng-repeat="curTest in submission.tests" is-open="curTest.cached.isShown">
+                        <accordion-group ng-repeat="curTest in submission.tests | orderBy : curTest.iRank" is-open="curTest.cached.isShown">
                            <div ng-include src="'submission-manager/view_test.html'"></div>
                         </accordion-group>
                      </accordion>

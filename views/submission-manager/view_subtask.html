@@ -23,7 +23,7 @@
 
 <div class="test">
 	<accordion close-others="true">
-		<accordion-group ng-repeat="curTest in submissionSubtask.submissionTests" is-open="curTest.cached.isShown">
+		<accordion-group ng-repeat="curTest in submissionSubtask.submissionTests | orderBy : curTest.iRank" is-open="curTest.cached.isShown">
 			<div ng-include src="'submission-manager/view_test.html'"></div>
 		</accordion-group>
 	</accordion>

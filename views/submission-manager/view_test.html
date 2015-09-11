@@ -2,7 +2,8 @@
    <p ng-click="clickTest(curTest.id)" ng-if="curTest.iScore > 0 && curTest.iScore < 100" class="heading_test"> <!-- i.e relative score -->
       <span class="idTest">
          <span ng-include src="'submission-manager/image_test.html'" class="imageTest"></span>
-         Test n°{{$index+1}} &nbsp; &nbsp;
+         <span ng-if="curTest.test_sGroupType == 'Evaluation'">Test n°{{$index+1}} &nbsp; &nbsp;</span>
+         <span ng-if="curTest.test_sGroupType !== 'Evaluation'">{{curTest.test_sName}} &nbsp; &nbsp;</span>
       </span>
       <span class="resultTest {{submissionManager.getClassTest(ERROR_RelativeScore)}}">
          Score partiel de {{curTest.iScore}}% en {{floor(curTest.iTimeMs/10)/100}} s
@@ -11,7 +12,8 @@
    <p ng-click="clickTest(curTest.id)" ng-if="!(curTest.iScore > 0 && curTest.iScore < 100)" ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)" class="heading_test">
       <span class="idTest">
          <span ng-include src="'submission-manager/image_test.html'" class="imageTest"></span> 
-         Test n°{{$index+1}} &nbsp; &nbsp;
+         <span ng-if="curTest.test_sGroupType == 'Evaluation'">Test n°{{$index+1}} &nbsp; &nbsp;</span>
+         <span ng-if="curTest.test_sGroupType !== 'Evaluation'">{{curTest.test_sName}} &nbsp; &nbsp;</span>
       </span>
       <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="ok">
          Réponse correcte en {{floor(curTest.iTimeMs/10)/100}} s
@@ -51,7 +53,7 @@
 <div ng-if="!(curTest.iScore > 0 && curTest.iScore < 100) && !(curTest.sOutput != '' && hasLoadedAnimation)" class="output">
    <div ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)">
       <span ng-switch-when="ok">
-         Bravo, votre programme a validé ce test. La réponse donnée par votre programme n'est pas affichée pour ne pas révéler d'informations sur nos tests.
+         Bravo, votre programme a validé ce test.<span ng-if="curTest.test_sGroupType == 'Evaluation'">La réponse donnée par votre programme n'est pas affichée pour ne pas révéler d'informations sur nos tests.</span>
       </span>
       <span ng-switch-when="error">
          <span ng-if="displayError(curTest.ID) && curTest.sOutput.length == 0"> <!-- We use datas in tm_submissions to display log errors if there's nothing in tm_submissions_tests -->
