@@ -1,6 +1,6 @@
 var submissionManager = {
    errorCode: {},
-	initConstants: function($scope)
+   initConstants: function($scope)
    {
       // Returned by the evaluation servers
       this.errorCode.ERROR_NoError = 0;
@@ -65,10 +65,11 @@ var submissionManager = {
    
    getDataTest : function(iErrorCode)
    {
+      var res = null;
       switch (iErrorCode)
       {
          case this.errorCode.ERROR_NoError:
-            return {
+            res = {
                status: 'ok',
                classToApply: 'succeed_test',
                classImage: 'glyphicon glyphicon-ok image_succeed_test',
@@ -76,21 +77,21 @@ var submissionManager = {
             break;
          case this.errorCode.ERROR_WrongAnswer:
          case this.errorCode.ERROR_WrongAnswerBis:
-            return {
+            res = {
                status: 'error',
                classToApply: 'error_test',
                classImage: 'glyphicon glyphicon-remove image_error_test',
             };
             break;
          case this.errorCode.ERROR_WrongAnswerCheck:
-            return {
+            res = {
                status: 'errorNoLog',
                classToApply: 'error_test',
                classImage: 'glyphicon glyphicon-remove image_error_test',
             };
             break;
          case this.errorCode.ERROR_AbortError:
-            return {
+            res = {
                status: 'abort',
                classToApply: 'crash_test',
                classImage: 'glyphicon glyphicon-fire image_crash_test',
@@ -98,14 +99,14 @@ var submissionManager = {
             break;
          case this.errorCode.ERROR_BusError:
          case this.errorCode.ERROR_BusError35:
-            return {
+            res = {
                status: 'busError',
                classToApply: 'crash_test',
                classImage: 'glyphicon glyphicon-fire image_crash_test',
                };
             break;
          case this.errorCode.ERROR_FloatingPointException:
-            return {
+            res = {
                status: 'floatingPointException',
                classToApply: 'crash_test',
                classImage: 'glyphicon glyphicon-fire image_crash_test',
@@ -115,7 +116,7 @@ var submissionManager = {
          case this.errorCode.ERROR_SegFault: 
          case this.errorCode.ERROR_StaticMemoryExceeded:
          case this.errorCode.ERROR_SegFault139:
-            return {
+            res = {
                status: 'memory',
                classToApply: 'crash_test',
                classImage: 'glyphicon glyphicon-fire image_crash_test',
@@ -123,20 +124,21 @@ var submissionManager = {
             break;
          case this.errorCode.ERROR_TimeLimitExceeded:
          case this.errorCode.ERROR_TimeLimitExceededBis:
-            return {
+            res = {
                status: 'timeout',
                classToApply: 'timeout_test',
                classImage: 'glyphicon glyphicon-time image_timeout_test',
             };
             break;
          case this.errorCode.ERROR_RelativeScore:
-            return {
+            res = {
                status: 'relative',
                classToApply: 'relative_test',
                classImage: 'glyphicon glyphicon-ok image_relative_test',
             };
             break;
       }
+      return res;
    },
    
    getStatusTest: function(iErrorCode)

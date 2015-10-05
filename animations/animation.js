@@ -2,14 +2,14 @@ function createInstance(name, commands, options) {
    /*var tag = "#" + name;
    $(tag).replaceWith($('#simuTemplate').clone().css('display', 'block').attr('id', $(tag).attr('id')));*/
    return new simulationInstance(tag, biggestStone(tag), commands);
-};
+}
 
 function simulationInstance(selector, task, commands) {
+   'use strict';
    //alert(selector);
    var isMutable = false;
    var mutableCallBack = null;
    var curCmd = 0;
-   var simu = this;
    var textDisplayed = false;
    var playModes = {
       stopped: 0,
@@ -30,10 +30,10 @@ function simulationInstance(selector, task, commands) {
       if (typeof cb != "undefined") {
          mutableCallBack = function() {
             cb(task.getInput());
-         }
+         };
          mutableCallBack();
       }
-   }
+   };
  
    var execCmd = function(cmd, cb) {
        
@@ -50,14 +50,14 @@ function simulationInstance(selector, task, commands) {
          cb();
       } else {
          
-         if (task[cmdName] == undefined) {
+         if (!task[cmdName]) {
             alert("Internal error : unknown command: '" + cmdName + "'");
             return;
          }
          task[cmdName](cmdArgs, cb);
          //alert("in");
       }
-   }
+   };
 
    var execNextCmd = function() {
       if (playMode == playModes.stopped) {
@@ -75,8 +75,8 @@ function simulationInstance(selector, task, commands) {
       if (playMode == playModes.paused) {
          cb = $.noop;
       }
-      execCmd(cmd, cb);      
-   }
+      execCmd(cmd, cb);
+   };
 
    if (typeof commands == "string") {
       commands = $.parseJSON(commands);
