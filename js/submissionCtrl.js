@@ -35,7 +35,7 @@ angular.module('submission-manager').directive('animation', function()
                   //});
                //});
                }, 1);*/
-               if (typeof anumationFeatures !== 'undefined') {
+               if (typeof animationFeatures !== 'undefined') {
                   simulationInstance(selector, animationFeatures(selector), $scope.commands);
                }
                $('.restart').trigger('click');
@@ -83,7 +83,6 @@ angular.module('submission-manager').controller('submissionController', ['$scope
          }
       }
       $scope.loading = false;
-      $scope.$apply();
 
       if ($scope.idShown != -1 && $scope.submission)
       {
