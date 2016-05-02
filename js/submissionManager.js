@@ -21,10 +21,10 @@ var submissionManager = {
       this.errorCode.ERROR_StaticMemoryExceeded = 10;
       this.errorCode.ERROR_BusError35 = 35;
       this.errorCode.ERROR_SegFault139 = 139;
-      
+
       // Not used in DB, only here
       this.errorCode.ERROR_RelativeScore = 150;
-      
+
       // Returned by the evaluation servers
       $scope.ERROR_NoError = 0;
       $scope.ERROR_WrongAnswer = 1;
@@ -44,25 +44,25 @@ var submissionManager = {
       $scope.ERROR_StaticMemoryExceeded = 10;
       $scope.ERROR_BusError35 = 35;
       $scope.ERROR_SegFault139 = 139;
-      
+
       // Not used in DB, only here
       $scope.ERROR_RelativeScore = 150;
    },
-   
+
    countSubtasksSucceeded : function(submission)
    {
       var nbSubtasksSucceeded = 0;
       for (var curSubtask = 0; curSubtask < submission.submissionSubtasks.length; curSubtask++)
       {
-         if (submission.submissionSubtasks[curSubtask].iSuccess == 1)
+         if (submission.submissionSubtasks[curSubtask].bSuccess)
          {
             nbSubtasksSucceeded++;
          }
       }
-      
+
       return nbSubtasksSucceeded;
    },
-   
+
    getDataTest : function(iErrorCode)
    {
       var res = null;
@@ -113,7 +113,7 @@ var submissionManager = {
                };
             break;
          /* Seg fault <=> memory problem */
-         case this.errorCode.ERROR_SegFault: 
+         case this.errorCode.ERROR_SegFault:
          case this.errorCode.ERROR_StaticMemoryExceeded:
          case this.errorCode.ERROR_SegFault139:
             res = {
@@ -140,17 +140,17 @@ var submissionManager = {
       }
       return res;
    },
-   
+
    getStatusTest: function(iErrorCode)
    {
       return submissionManager.getDataTest(iErrorCode).status;
    },
-   
+
    getClassTest: function(iErrorCode)
    {
       return submissionManager.getDataTest(iErrorCode).classToApply;
    },
-   
+
    getClassImageTest: function(iErrorCode)
    {
       //alert(submissionManager.getDataTest(iErrorCode).classImage);

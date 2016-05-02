@@ -1,4 +1,4 @@
-<accordion-heading>
+<uib-accordion-heading>
    <p ng-click="clickTest(curTest.id)" ng-if="curTest.iScore > 0 && curTest.iScore < 100" class="heading_test"> <!-- i.e relative score -->
       <span class="idTest">
          <span ng-include src="'submission-manager/image_test.html'" class="imageTest"></span>
@@ -11,7 +11,7 @@
    </p>
    <p ng-click="clickTest(curTest.id)" ng-if="!(curTest.iScore > 0 && curTest.iScore < 100)" ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)" class="heading_test">
       <span class="idTest">
-         <span ng-include src="'submission-manager/image_test.html'" class="imageTest"></span> 
+         <span ng-include src="'submission-manager/image_test.html'" class="imageTest"></span>
          <span ng-if="curTest.test_sGroupType == 'Evaluation'">Test n°{{$index+1}} &nbsp; &nbsp;</span>
          <span ng-if="curTest.test_sGroupType !== 'Evaluation'">{{curTest.test_sName}} &nbsp; &nbsp;</span>
       </span>
@@ -41,7 +41,7 @@
       </span>
    </p>
 
-</accordion-heading>
+</uib-accordion-heading>
 <!--<td ng-switch="curTest.iErrorCode">-->
 
 <div ng-if="curTest.iScore > 0 && curTest.iScore < 100" class="output"> <!-- i.e relative score -->
@@ -59,19 +59,19 @@
          <span ng-if="displayError(curTest.ID) && curTest.sOutput.length == 0"> <!-- We use datas in tm_submissions to display log errors if there's nothing in tm_submissions_tests -->
             Votre programme a renvoyé :<br/>
             <pre class="log">{{submission.sFirstUserOutput}}</pre>
-            
+
             Il aurait dû renvoyer :<br/>
             <pre class="log">{{submission.sFirstExpectedOutput}}</pre>
-            
+
             <span ng-show="curTest.iErrorCode == ERROR_WrongAnswer"> <!-- diff shall not be shown when iErrorCode = ERROR_WrongAnswerBis -->
                Pour vous aider, voici le premier caractère différent : <br />
-               <pre class="log" ng-bind-html="toTrust(firstCharDiff(submission.sFirstUserOutput, submission.sFirstExpectedOutput))"></pre> 
+               <pre class="log" ng-bind-html="toTrust(firstCharDiff(submission.sFirstUserOutput, submission.sFirstExpectedOutput))"></pre>
             </span>
          </span>
          <span ng-if="displayError(curTest.ID) && curTest.sOutput.length > 0"> <!-- Otherwise, we use datas in tm_submissions_tests -->
             Votre programme a renvoyé :<br/>
             <pre class="log">{{curTest.sOutput}}</pre>
-            
+
             Il aurait dû renvoyer :<br/>
             <pre class="log">{{curTest.sExpectedOutput}}</pre>
             <span ng-show="curTest.iErrorCode == ERROR_WrongAnswer"> <!-- diff shall not be shown when iErrorCode = ERROR_WrongAnswerBis -->

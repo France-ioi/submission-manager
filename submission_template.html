@@ -27,12 +27,12 @@
 	<body ng-controller="submissionCtrl">
       <div class="submission_global">
          <div ng-if="submission != undefined" ng-hide="loading">
-            
-            <accordion close-others="false">
-               <accordion-group is-open="showSubmission">
-                  <accordion-heading>
+
+            <uib-accordion close-others="false">
+               <uib-accordion-group is-open="showSubmission">
+                  <uib-accordion-heading>
                      <div ng-include src="'template/header_template.html'"></div>
-                  </accordion-heading>
+                  </uib-accordion-heading>
 
                   <div ng-if="submission != undefined && !submission.bEvaluated && !loading" class="submission_global">
                      <div class="submission_error">
@@ -41,47 +41,47 @@
                         </p>
                      </div>
                   </div>
-                   
+
                   <div ng-if="submission.bEvaluated">
                      <div ng-show="submission.bCompilError" class="submission_error">
                         Erreur de compilation<br />
                         <pre>{{submission.sCompilMgs}}</pre>
                      </div>
-                     
+
                      <div ng-show="!(submission.tests.length > 0) && !submission.bCompilError && submission.bEvaluated" class="submission_error">
                         <p>
                            Il n'existe pas de tests pour ce problème.
                         </p>
                      </div>
-                     
+
                      <div ng-hide="!submission.bEvaluated || submission.bCompilError" ng-if="submission.tests.length > 0">
-                     
+
                         <div ng-if="submission.sCompilMsg.length > 0" class="compil_error">
                            Résultat de la compilation :
                            <pre>{{submission.sCompilMsg}}</pre>
                         </div>
-                        
+
                         <div ng-if="submission.submissionSubtasks.length > 0">
-                           <accordion close-others="true">
-                              <accordion-group ng-repeat="submissionSubtask in submission.submissionSubtasks" class="subtask_global" is-open="submissionSubtask.cached.showDetailsTests">
+                           <uib-accordion close-others="true">
+                              <uib-accordion-group ng-repeat="submissionSubtask in submission.submissionSubtasks" class="subtask_global" is-open="submissionSubtask.cached.showDetailsTests">
                                  <div ng-include src="'template/view_subtask.html'"></div>
-                              </accordion-group>
-                           </accordion>
+                              </uib-accordion-group>
+                           </uib-accordion>
                         </div>
 
                         <div class="test" ng-if="submission.submissionSubtasks.length == 0">
-                           <accordion close-others="true">
-                              <accordion-group ng-repeat="curTest in submission.tests" is-open="curTest.cached.isShown">
+                           <uib-accordion close-others="true">
+                              <uib-accordion-group ng-repeat="curTest in submission.tests" is-open="curTest.cached.isShown">
                                  <div ng-include src="'template/view_test.html'"></div>
-                              </accordion-group>
-                           </accordion>
+                              </uib-accordion-group>
+                           </uib-accordion>
                         </div>
                      </div> <!-- End tests -->
-                     
-                  </div> 
-               </accordion-group>
-            </accordion>
-            
+
+                  </div>
+               </uib-accordion-group>
+            </uib-accordion>
+
          </div> <!-- End submission details -->
       </div> <!-- End submission -->
 	</body>

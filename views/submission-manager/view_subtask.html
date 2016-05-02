@@ -1,30 +1,30 @@
-<accordion-heading>
-	<div class="subtask">
-		<span class="subtask_name">
-			<span class="glyphicon glyphicon-ok image_succeed_subtask" ng-show="submissionSubtask.iSuccess"></span>
-			<span class="glyphicon glyphicon-remove image_failure_subtask" ng-show="!submissionSubtask.iSuccess"></span>
-			{{submissionSubtask.subtask_name}} 
-		</span>
-		
-		<span class="subtask_data">
-			<span>
-				Tests validés : {{countTestsSucceeded(submissionSubtask)}} / {{submissionSubtask.submissionTests.length}}
-				<span class="subtask_min_test">
-					<span ng-repeat="curTest in submissionSubtask.submissionTests" ng-include src="'submission-manager/view_test_min.html'"  class="disp_min"></span>
-				</span>
-			</span>
-		</span>
-		
-		<span class="score">
-			Score : {{round(submissionSubtask.iScore * submissionSubtask.subtask_iPointsMax / 100)}} / {{submissionSubtask.subtask_iPointsMax}}
-		</span>
-	</div>
-</accordion-heading>
+<uib-accordion-heading>
+   <div class="subtask">
+      <span class="subtask_name">
+         <span class="glyphicon glyphicon-ok image_succeed_subtask" ng-show="submissionSubtask.bSuccess"></span>
+         <span class="glyphicon glyphicon-remove image_failure_subtask" ng-show="!submissionSubtask.bSuccess"></span>
+         {{submissionSubtask.subtask_name}}
+      </span>
+
+      <span class="subtask_data">
+         <span>
+            Tests validés : {{countTestsSucceeded(submissionSubtask)}} / {{submissionSubtask.submissionTests.length}}
+            <span class="subtask_min_test">
+               <span ng-repeat="curTest in submissionSubtask.submissionTests" ng-include src="'submission-manager/view_test_min.html'"  class="disp_min"></span>
+            </span>
+         </span>
+      </span>
+
+      <span class="score">
+         Score : {{round(submissionSubtask.iScore * submissionSubtask.subtask_iPointsMax / 100)}} / {{submissionSubtask.subtask_iPointsMax}}
+      </span>
+   </div>
+</uib-accordion-heading>
 
 <div class="test">
-	<accordion close-others="true">
-		<accordion-group ng-repeat="curTest in submissionSubtask.submissionTests | orderBy : curTest.iRank" is-open="curTest.cached.isShown">
-			<div ng-include src="'submission-manager/view_test.html'"></div>
-		</accordion-group>
-	</accordion>
+   <uib-accordion close-others="true">
+      <uib-accordion-group ng-repeat="curTest in submissionSubtask.submissionTests | orderBy : curTest.iRank" is-open="curTest.cached.isShown">
+         <div ng-include src="'submission-manager/view_test.html'"></div>
+      </uib-accordion-group>
+   </uib-accordion>
 </div>
