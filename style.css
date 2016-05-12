@@ -273,3 +273,8 @@
    text-align:center;
    margin:10px;
 }
+
+.errorInLog {
+   background-color:red;
+   color:white;
+}

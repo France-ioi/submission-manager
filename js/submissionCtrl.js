@@ -229,7 +229,91 @@ angular.module('submission-manager').controller('submissionController', ['$scope
          }
       }
    };
-   
+
+   function getDiffHtmlFromLines(src, dst) {
+      if (src == '') return '';
+      if (dst == '') return '<span class="errorInLog">'+src+'</span>';
+      var indexStart = -1;
+      var indexStop = -1;
+      var i, idest;
+      for (i = 0; i < src.length; i++) {
+         if (i >= dst.length) {
+            return src;
+         }
+         if (src[i] != dst[i]) {
+            indexStart = i;
+            break;
+         }
+      }
+      if (indexStart == -1) {
+         return src;
+      }
+      for (i = src.length-1; i >= 0; i--) {
+         idest = i + dst.length - src.length;
+         if (idest < 0 || src[i] != dst[idest]) {
+            indexStop = i;
+            break;
+         }
+      }
+      if (indexStop == -1) {
+         indexStop = src.length-1;
+      }
+      if (indexStop < indexStart) {
+         console.error('ho ho...');
+         return src;
+      }
+      var res = src.substring(0,indexStart);
+      res += '<span class="errorInLog">';
+      res += src.substring(indexStart, indexStop+1);
+      res += '</span>';
+      res += src.substring(indexStop+1);
+      return res;
+   }
+
+   // The following function defines the behavior for the default log format. See
+   // the documentation of taskgrader for more information.
+   function getDiffHtmlFromLog(log) {
+      resSol = '';
+      resExp = '';
+      if (log.excerptRow > 1) {
+         resSol += '...\n';
+         resExp += '...\n';
+      }
+      var iRow;
+      var realdiffRow = log.diffRow - log.excerptRow;
+      var rowsSol = log.displayedSolutionOutput.split('\n');
+      var rowsExp = log.displayedExpectedOutput.split('\n');
+      for (iRow = 0; iRow < realdiffRow; iRow++) {
+         resSol += rowsSol[iRow]+'\n';
+         resExp += rowsSol[iRow]+'\n';
+      }
+      for (iRow = realdiffRow; iRow < Math.max(rowsSol.length, rowsExp.length); iRow++) {
+         var thisRowSol = iRow < rowsSol.length ? rowsSol[iRow] : '';
+         var thisRowExp = iRow < rowsExp.length ? rowsExp[iRow] : '';
+         resSol += getDiffHtmlFromLines(thisRowSol, thisRowExp);
+         resExp += getDiffHtmlFromLines(thisRowExp, thisRowSol);
+      }
+      if (log.truncatedAfter) {
+         resSol += '... ';
+         resExp += '... ';
+      }
+      res =  'Votre programme a affiché :<br>\n';
+      res += '<pre>'+resSol+'</pre>';
+      res += 'alors que la réponse attendue était :<br>\n';
+      res += '<pre>'+resExp+'</pre>';
+      res += 'Pour vous aider, le premier caractère différent est mis sur fond rouge.<br><br>Vérifiez bien que vous affichez exactement ce qui est demandé et rien de plus. Vérifiez aussi les retours à la ligne.';
+      return res;
+   }
+
+   $scope.getLog = function(sLog) {
+      try {
+         var sLogParsed = JSON.parse(sLog);
+         return getDiffHtmlFromLog(sLogParsed);
+      } catch (e) {
+         return 'Message d\'évaluation :<pre>'+sLog+'</pre>';
+      }
+   };
+
    $scope.round = function(val)
    {
       return Math.round(val);
