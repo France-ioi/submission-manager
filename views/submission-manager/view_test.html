@@ -79,7 +79,7 @@
                <pre class="log" ng-bind-html="toTrust(firstCharDiff(curTest.sOutput, curTest.sExpectedOutput))"></pre>
             </span>
          </span>
-         <span ng-if="!displayError(curTest.ID) && !curTest.sLog">
+         <span ng-if="!displayError(curTest.ID) && !curTest.sLog && !curTest.sErrorMsg">
             Aucun log n'est disponible pour ce test.
          </span>
       </span>
