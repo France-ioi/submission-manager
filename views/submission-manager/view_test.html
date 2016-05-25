@@ -53,7 +53,7 @@
 <div ng-if="!(curTest.iScore > 0 && curTest.iScore < 100) && !(curTest.sOutput != '' && hasLoadedAnimation)" class="output">
    <div ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)">
       <span ng-switch-when="ok">
-         Bravo, votre programme a validé ce test.<span ng-if="curTest.test_sGroupType == 'Evaluation'">La réponse donnée par votre programme n'est pas affichée pour ne pas révéler d'informations sur nos tests.</span>
+         Bravo, votre programme a validé ce test.
       </span>
       <span ng-switch-when="error">
          <span ng-if="displayError(curTest.ID) && curTest.sOutput.length == 0"> <!-- We use datas in tm_submissions to display log errors if there's nothing in tm_submissions_tests -->
@@ -79,7 +79,7 @@
                <pre class="log" ng-bind-html="toTrust(firstCharDiff(curTest.sOutput, curTest.sExpectedOutput))"></pre>
             </span>
          </span>
-         <span ng-if="!displayError(curTest.ID) && !curTest.sLog && !curTest.sErrorMsg">
+         <span ng-if="!displayError(curTest.ID) && !curTest.sLog && !curTest.jFiles && !curTest.sErrorMsg">
             Aucun log n'est disponible pour ce test.
          </span>
       </span>
@@ -122,7 +122,7 @@
       Message d'erreur renvoyé à l'évaluation :
       <pre>{{curTest.sErrorMsg}}</pre>
    </div>
-   <div ng-if="curTest.sLog">
-      <div ng-bind-html="toTrust(getLog(curTest.sLog))"></div>
+   <div ng-if="curTest.sLog || curTest.jFiles">
+      <div ng-bind-html="toTrust(getLog(curTest))"></div>
    </div>
 </div>

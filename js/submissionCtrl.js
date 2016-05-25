@@ -305,13 +305,18 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       return res;
    }
 
-   $scope.getLog = function(sLog) {
+   $scope.getLog = function(curTest) {
+      var evalFun = curTest.submission.task.displayChecker;
+      if (evalFun) {
+         return evalFun(curTest);
+      }
+      var sLog = curTest.sLog;
       try {
          var sLogParsed = JSON.parse(sLog);
-         return getDiffHtmlFromLog(sLogParsed);
       } catch (e) {
          return 'Message d\'évaluation :<pre>'+sLog+'</pre>';
       }
+      return getDiffHtmlFromLog(sLogParsed);
    };
 
    $scope.round = function(val)
