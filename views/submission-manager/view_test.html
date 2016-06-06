@@ -46,6 +46,9 @@
 
 <div ng-if="curTest.iScore > 0 && curTest.iScore < 100" class="output"> <!-- i.e relative score -->
    Vous avez obtenu un score partiel. Vous pouvez améliorer votre programme pour augmenter votre score.
+   <div ng-if="curTest.sLog || curTest.jFiles">
+      <div ng-bind-html="toTrust(getLog(curTest))"></div>
+   </div>
 </div>
 
 <div ng-if="curTest.sOutput != '' && hasLoadedAnimation" class="output" animation commands="curTest.sOutput" idtest="curTest.id"></div>
