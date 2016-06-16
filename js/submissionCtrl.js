@@ -298,15 +298,15 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       if (diffCol < diffRowSol.length) {
          resSol += diffRowSol.substring(0, diffCol);
          resSol += '<span class="errorInLog">';
-         resSol += src.substring(diffCol, diffCol+1);
+         resSol += diffRowSol.substring(diffCol, diffCol+1);
          resSol += '</span>';
-         resSol += src.substring(diffCol+1);
+         resSol += diffRowSol.substring(diffCol+1);
       } else {
          // There is no character in the solution on that position, we add a space
          resSol += diffRowSol;
          resSol += '<span class="errorInLog">&nbsp;</span>';
       }
-      rowExp += realdiffRow < rowsExp.length ? rowsExp[realdiffRow] : '';
+      resExp += realdiffRow < rowsExp.length ? rowsExp[realdiffRow] : '';
 
       // Rows after the diff
       for (iRow = realdiffRow+1; iRow < Math.max(rowsSol.length, rowsExp.length); iRow++) {
