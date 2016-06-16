@@ -231,6 +231,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
    };
 
    function getDiffHtmlFromLines(src, dst) {
+      // No longer used
       if (src == '') return '';
       if (dst == '') return '<span class="errorInLog">'+src+'</span>';
       var indexStart = -1;
@@ -283,16 +284,36 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       var realdiffRow = log.diffRow - log.excerptRow;
       var rowsSol = log.displayedSolutionOutput.split('\n');
       var rowsExp = log.displayedExpectedOutput.split('\n');
+
+      // Rows before the diff
       for (iRow = 0; iRow < realdiffRow; iRow++) {
          resSol += rowsSol[iRow]+'\n';
          resExp += rowsSol[iRow]+'\n';
       }
-      for (iRow = realdiffRow; iRow < Math.max(rowsSol.length, rowsExp.length); iRow++) {
-         var thisRowSol = iRow < rowsSol.length ? rowsSol[iRow] : '';
-         var thisRowExp = iRow < rowsExp.length ? rowsExp[iRow] : '';
-         resSol += getDiffHtmlFromLines(thisRowSol, thisRowExp);
-         resExp += getDiffHtmlFromLines(thisRowExp, thisRowSol);
+
+      // Row with the diff
+      var diffRowSol = realdiffRow < rowsSol.length ? rowsSol[realdiffRow] : '';
+      var diffCol = log.diffCol-1
+      // Highlight only the first different character
+      if (diffCol < diffRowSol.length) {
+         resSol += diffRowSol.substring(0, diffCol);
+         resSol += '<span class="errorInLog">';
+         resSol += src.substring(diffCol, diffCol+1);
+         resSol += '</span>';
+         resSol += src.substring(diffCol+1);
+      } else {
+         // There is no character in the solution on that position, we add a space
+         resSol += diffRowSol;
+         resSol += '<span class="errorInLog">&nbsp;</span>';
       }
+      rowExp += realdiffRow < rowsExp.length ? rowsExp[realdiffRow] : '';
+
+      // Rows after the diff
+      for (iRow = realdiffRow+1; iRow < Math.max(rowsSol.length, rowsExp.length); iRow++) {
+         resSol += iRow < rowsSol.length ? rowsSol[iRow] : '';
+         resExp += iRow < rowsExp.length ? rowsExp[iRow] : '';
+      }
+
       if (log.truncatedAfter) {
          resSol += '... ';
          resExp += '... ';
