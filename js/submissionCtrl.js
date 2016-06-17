@@ -306,12 +306,13 @@ angular.module('submission-manager').controller('submissionController', ['$scope
          resSol += diffRowSol;
          resSol += '<span class="errorInLog">&nbsp;</span>';
       }
-      resExp += realdiffRow < rowsExp.length ? rowsExp[realdiffRow] : '';
+      resSol += '\n';
+      resExp += realdiffRow < rowsExp.length ? (rowsExp[realdiffRow]+'\n') : '';
 
       // Rows after the diff
       for (iRow = realdiffRow+1; iRow < Math.max(rowsSol.length, rowsExp.length); iRow++) {
-         resSol += iRow < rowsSol.length ? rowsSol[iRow] : '';
-         resExp += iRow < rowsExp.length ? rowsExp[iRow] : '';
+         resSol += iRow < rowsSol.length ? (rowsSol[iRow]+'\n') : '';
+         resExp += iRow < rowsExp.length ? (rowsExp[iRow]+'\n') : '';
       }
 
       if (log.truncatedAfter) {
