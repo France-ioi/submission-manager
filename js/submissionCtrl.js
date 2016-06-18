@@ -11,7 +11,7 @@ angular.module('submission-manager').directive('animation', function()
          idtest: '=',
          commands: '='
       },
-      link: function ($scope, $elem, attrs) 
+      link: function ($scope, $elem, attrs)
       {
          var hasLoadedSimulation = [];
          hasLoadedSimulation[$scope.idtest] = false;
@@ -21,7 +21,7 @@ angular.module('submission-manager').directive('animation', function()
             console.error('can\'t parse '+$scope.commands);
          }
          var selector = '#anim' + $scope.idtest + '';
-         $scope.$on("clickOnTest", function (event, args) 
+         $scope.$on("clickOnTest", function (event, args)
          {
             if (args[0] == $scope.idtest && !hasLoadedSimulation[$scope.idtest])
             {
@@ -61,14 +61,15 @@ angular.module('submission-manager').controller('submissionController', ['$scope
 
 //   $scope.hasAskedSubmission = false;
 //   $scope.idShown = -1;
-   
+
 //   $scope.submission = new Array();
 //   $scope.submission.subtasks = new Array();
+   $scope.showSubmission = true;
    $scope.showDetailsTests = false; // Used when there are no subtasks.
    $scope.hasLoadedAnim = false;
 
    SyncQueue.addSyncEndListeners("submissionController.apply", function () {
-      if ($scope.submission) 
+      if ($scope.submission)
       {
          var idShown = $scope.initDetailsTests($scope.submission);
          if (idShown !== -1)
@@ -105,16 +106,16 @@ angular.module('submission-manager').controller('submissionController', ['$scope
          return false;
       }
    };
-   
+
    $scope.nl2br = function (str) {
       return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br>$2');
    };
-   
+
    $scope.toTrust = function(str)
    {
       return $sce.trustAsHtml(str);
    };
-   
+
    $scope.countTestsSucceeded = function(curSubtask)
    {
       var nbTestsSucceeded = 0;
@@ -127,7 +128,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       }
       return nbTestsSucceeded;
    };
-   
+
    $scope.initDetailsTests = function(submission)
    {
       var idApplied = -1;
@@ -140,12 +141,12 @@ angular.module('submission-manager').controller('submissionController', ['$scope
          for (var curSubtask = 0; curSubtask < subtasks.length; curSubtask++)
          {
             var subtask = subtasks[curSubtask];
-            
+
             if (!subtask.cached) // If it is undefined, we set it.
             {
                subtask.cached = [];
                subtask.cached.showDetailsTests = false;
-               
+
                for (iTest = 0; iTest < subtask.submissionTests.length; iTest++) // Nevertheless, if we find a test that has an error, we automatically display it
                {
                   curTest = subtask.submissionTests[iTest];
@@ -168,7 +169,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
                hasFoundAnError = true;
             }
          }
-         
+
          if (!hasFoundAnError) // No error => we display both the first subtask and the first test
          {
             subtasks[0].cached.showDetailsTests = true;
@@ -180,17 +181,17 @@ angular.module('submission-manager').controller('submissionController', ['$scope
          }
       }
       // If there are no subtasks
-      
+
       if ($scope.submission.submissionSubtasks.length === 0 && $scope.submission.tests.length > 0)
       {
          hasFoundAnError = false;
-         
+
          for (iTest = 0; iTest < submission.tests.length; iTest++)
          {
             curTest = submission.tests[iTest];
             if (!curTest.cached) // We set it
             {
-               curTest.cached = [];
+               curTest.cached = {};
                if (submissionManager.getStatusTest(curTest.iErrorCode) != 'ok' && !hasFoundAnError)
                {
                   curTest.cached.isShown = true;
@@ -207,17 +208,17 @@ angular.module('submission-manager').controller('submissionController', ['$scope
                hasFoundAnError = true;
             }
          }
-            
+
          if (!hasFoundAnError)
          {
             submission.tests[0].cached.isShown = true;
             idApplied = submission.tests[0].id;
          }
       }
-      
+
       return idApplied;
    };
-   
+
    $scope.configureLogsError = function(tests)
    {
       for (var iTest = 0; iTest < tests.length; iTest++)
@@ -345,12 +346,12 @@ angular.module('submission-manager').controller('submissionController', ['$scope
    {
       return Math.round(val);
    };
-   
+
    $scope.floor = function(val)
    {
       return Math.floor(val);
    };
-   
+
    $scope.firstCharDiff = function(inputStr, expectedStr)
    {
       var result = "";
@@ -369,7 +370,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       }
       return result;
    };
-   
+
    $scope.formatDate = function(date) // Not used
    {
       var months = [];
@@ -385,26 +386,26 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       months.Oct = "10";
       months.Nov = "11";
       months.Dec = "12";
-      
+
       date = date.toString();
       date = date.split(' ');
-      
+
       var dayData = date[4].split(':');
-      
+
       var str = date[2] + "/" + months[date[1]] + "/" + date[3] + " à " + dayData[0] + ':' + dayData[1];
       return str;
    };
-   
+
    $scope.getImageAbsoluteUrl = function(idTask, md5, imageName)
    {
       return 'http://data.france-ioi.org/' + idTask + '/' + md5 + '/' + imageName;
    };
-   
+
    $scope.toLog = function (str) // Debug function - to remove later
    {
       console.log(str);
    };
-   
+
    $scope.clickTest = function(idTest)
    {
       var arg = [idTest];
