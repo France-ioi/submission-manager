@@ -275,6 +275,9 @@ angular.module('submission-manager').controller('submissionController', ['$scope
    // The following function defines the behavior for the default log format. See
    // the documentation of taskgrader for more information.
    function getDiffHtmlFromLog(log) {
+      if (!log) {
+         return '';
+      }
       resSol = '';
       resExp = '';
       if (log.excerptRow > 1) {
