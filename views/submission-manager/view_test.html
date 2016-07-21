@@ -1,5 +1,5 @@
 <uib-accordion-heading>
-   <p ng-click="clickTest(curTest.id)" ng-if="curTest.iScore > 0 && curTest.iScore < 100" class="heading_test"> <!-- i.e relative score -->
+   <p ng-click="clickTest(curTest.ID)" ng-if="curTest.iScore > 0 && curTest.iScore < 100" class="heading_test"> <!-- i.e relative score -->
       <span class="idTest">
          <span ng-include src="'submission-manager/image_test.html'" class="imageTest"></span>
          <span ng-if="curTest.test_sGroupType == 'Evaluation'">Test n°{{$index+1}} &nbsp; &nbsp;</span>
@@ -9,7 +9,7 @@
          Score partiel de {{curTest.iScore}}% en {{floor(curTest.iTimeMs/10)/100}} s
       </span>
    </p>
-   <p ng-click="clickTest(curTest.id)" ng-if="!(curTest.iScore > 0 && curTest.iScore < 100)" ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)" class="heading_test">
+   <p ng-click="clickTest(curTest.ID)" ng-if="!(curTest.iScore > 0 && curTest.iScore < 100)" ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)" class="heading_test">
       <span class="idTest">
          <span ng-include src="'submission-manager/image_test.html'" class="imageTest"></span>
          <span ng-if="curTest.test_sGroupType == 'Evaluation'">Test n°{{$index+1}} &nbsp; &nbsp;</span>
@@ -51,7 +51,7 @@
    </div>
 </div>
 
-<div ng-if="curTest.sOutput != '' && hasLoadedAnimation" class="output" animation commands="curTest.sOutput" idtest="curTest.id"></div>
+<div ng-if="curTest.sLog != '' && hasLoadedAnimation" class="output" animation commands="curTest.sLog" idtest="curTest.ID"></div>
 
 <div ng-if="!(curTest.iScore > 0 && curTest.iScore < 100) && !(curTest.sOutput != '' && hasLoadedAnimation)" class="output">
    <div ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)">

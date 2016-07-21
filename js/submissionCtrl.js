@@ -156,7 +156,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
                      subtask.cached.showDetailsTests = true;
                      curTest.cached.isShown = true;
                      hasFoundAnError = true;
-                     idApplied = curTest.id;
+                     idApplied = curTest.ID;
                   }
                   else
                   {
@@ -176,7 +176,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
             if (subtasks[0].submissionTests.length > 0) // We make sure that some tests exist
             {
                subtasks[0].submissionTests[0].cached.isShown = true;
-               idApplied = subtasks[0].submissionTests[0].id;
+               idApplied = subtasks[0].submissionTests[0].ID;
             }
          }
       }
@@ -196,7 +196,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
                {
                   curTest.cached.isShown = true;
                   hasFoundAnError = true;
-                  idApplied = curTest.id;
+                  idApplied = curTest.ID;
                }
                else
                {
@@ -212,7 +212,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
          if (!hasFoundAnError)
          {
             submission.tests[0].cached.isShown = true;
-            idApplied = submission.tests[0].id;
+            idApplied = submission.tests[0].ID;
          }
       }
 
