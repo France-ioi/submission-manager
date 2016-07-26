@@ -1,7 +1,7 @@
-function createInstance(name, commands, options) {
+function createInstance(tag, commands, options) {
    /*var tag = "#" + name;
    $(tag).replaceWith($('#simuTemplate').clone().css('display', 'block').attr('id', $(tag).attr('id')));*/
-   return new simulationInstance(tag, biggestStone(tag), commands);
+   return new simulationInstance(tag, animationFeatures(tag), commands);
 }
 
 function simulationInstance(selector, task, commands) {
@@ -43,7 +43,7 @@ function simulationInstance(selector, task, commands) {
          var pre = $(".textOutput", selector);
          if (!textDisplayed) {
             textDisplayed = true;
-            pre.html("Texte affichÃ© par votre programme :\n");
+            pre.html("Texte affiché par votre programme :\n");
             pre.show();
          }
          pre.html(pre.html() + cmdArgs[0] + "<br/>");

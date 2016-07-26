@@ -29,7 +29,7 @@ gulp.task('templates', function () {
 });
 
 gulp.task('js', ['templates'], function() {
-  return gulp.src(['js/submissionCtrl.js','js/submissionManager.js','animation/animation.js','js/templates.js'])
+  return gulp.src(['js/submissionCtrl.js','js/submissionManager.js','animations/animation.js','js/templates.js'])
     .pipe(sourcemaps.init())
     .pipe(concat('submission-manager.min.js'))
     .pipe(uglify())
