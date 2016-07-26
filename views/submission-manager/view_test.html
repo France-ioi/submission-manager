@@ -46,12 +46,12 @@
 
 <div ng-if="curTest.iScore > 0 && curTest.iScore < 100" class="output"> <!-- i.e relative score -->
    Vous avez obtenu un score partiel. Vous pouvez améliorer votre programme pour augmenter votre score.
-   <div ng-if="curTest.sLog || curTest.jFiles">
+   <div ng-if="(curTest.sLog || curTest.jFiles) && !hasAnimation">
       <div ng-bind-html="toTrust(getLog(curTest))"></div>
    </div>
 </div>
 
-<div ng-if="curTest.sLog != '' && hasLoadedAnimation" class="output" animation commands="curTest.sLog" idtest="curTest.ID"></div>
+<div ng-if="curTest.sLog != '' && hasAnimation" class="output" animation commands="curTest.sLog" idtest="curTest.ID"></div>
 
 <div ng-if="!(curTest.iScore > 0 && curTest.iScore < 100) && !(curTest.sOutput != '' && hasLoadedAnimation)" class="output">
    <div ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)">
@@ -125,7 +125,7 @@
       Message d'erreur renvoyé à l'évaluation :
       <pre>{{curTest.sErrorMsg}}</pre>
    </div>
-   <div ng-if="curTest.sLog || curTest.jFiles">
+   <div ng-if="(curTest.sLog || curTest.jFiles) && !hasAnimation">
       <div ng-bind-html="toTrust(getLog(curTest))"></div>
    </div>
 </div>

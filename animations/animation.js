@@ -1,4 +1,4 @@
-function createInstance(name, commands, options) {
+function createInstance(tag, commands, options) {
    /*var tag = "#" + name;
    $(tag).replaceWith($('#simuTemplate').clone().css('display', 'block').attr('id', $(tag).attr('id')));*/
    return new simulationInstance(tag, animationFeatures(tag), commands);

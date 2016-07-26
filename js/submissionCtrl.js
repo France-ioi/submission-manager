@@ -26,15 +26,6 @@ angular.module('submission-manager').directive('animation', function()
             if (args[0] == $scope.idtest && !hasLoadedSimulation[$scope.idtest])
             {
                hasLoadedSimulation[$scope.idtest] = true;
-               /*setTimeout( function() {
-               //$.getScript('animations/raphael-min.js', function() {
-                  //$.getScript('animations/animation.js', function () {
-                    // $.getScript('animations/anim_example.js', function() {
-                        simulationInstance(selector, animationFeatures(selector), $scope.commands);
-                     //});
-                  //});
-               //});
-               }, 1);*/
                if (typeof animationFeatures !== 'undefined') {
                   simulationInstance(selector, animationFeatures(selector), $scope.commands);
                }
@@ -77,11 +68,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
             $scope.idShown = idShown;
          }
          $scope.configureLogsError($scope.submission.tests);
-         if ($scope.submission.task_sScriptAnimation && !$scope.hasLoadedAnimation)
-         {
-            $scope.hasLoadedAnimation = true;
-            addScript($scope.submission.task_sScriptAnimation); // TODO: use eval instead?
-         }
+         $scope.hasAnimation = ($scope.submission.task_sScriptAnimation != '');
       }
       $scope.loading = false;
 
