@@ -68,7 +68,9 @@ angular.module('submission-manager').controller('submissionController', ['$scope
             $scope.idShown = idShown;
          }
          $scope.configureLogsError($scope.submission.tests);
-         $scope.hasAnimation = ($scope.submission.task_sScriptAnimation != '');
+         if (typeof animationFeatures !== 'undefined') {
+           $scope.hasAnimation = true;
+         } else { $scope.hasAnimation = false; }
       }
       $scope.loading = false;
 
