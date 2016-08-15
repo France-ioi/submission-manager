@@ -327,7 +327,10 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       try {
          var sLogParsed = JSON.parse(sLog);
       } catch (e) {
-         return 'Message d\'évaluation :<pre>'+sLog+'</pre>';
+         function htmlEntities(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+         }
+         return 'Message d\'évaluation :<pre>'+htmlEntities(sLog)+'</pre>';
       }
       return getDiffHtmlFromLog(sLogParsed);
    };
