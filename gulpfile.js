@@ -17,7 +17,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('hint', function() {
-  return gulp.src(['js/recentSubmissionsCtrl.js','js/submissionCtrl.js','js/submissionManager.js','animation/animation.js'])
+  return gulp.src(['js/recentSubmissionsCtrl.js','js/submissionCtrl.js','js/submissionManager.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
 });
@@ -29,7 +29,7 @@ gulp.task('templates', function () {
 });
 
 gulp.task('js', ['templates'], function() {
-  return gulp.src(['js/submissionCtrl.js','js/submissionManager.js','animations/animation.js','js/templates.js'])
+  return gulp.src(['js/submissionCtrl.js','js/submissionManager.js','js/templates.js'])
     .pipe(sourcemaps.init())
     .pipe(concat('submission-manager.min.js'))
     .pipe(uglify())

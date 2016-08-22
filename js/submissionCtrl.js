@@ -68,7 +68,9 @@ angular.module('submission-manager').controller('submissionController', ['$scope
             $scope.idShown = idShown;
          }
          $scope.configureLogsError($scope.submission.tests);
-         $scope.hasAnimation = ($scope.submission.task_sScriptAnimation != '');
+         if (typeof animationFeatures !== 'undefined') {
+           $scope.hasAnimation = true;
+         } else { $scope.hasAnimation = false; }
       }
       $scope.loading = false;
 
@@ -327,7 +329,10 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       try {
          var sLogParsed = JSON.parse(sLog);
       } catch (e) {
-         return 'Message d\'évaluation :<pre>'+sLog+'</pre>';
+         function htmlEntities(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+         }
+         return 'Message d\'évaluation :<pre>'+htmlEntities(sLog)+'</pre>';
       }
       return getDiffHtmlFromLog(sLogParsed);
    };
