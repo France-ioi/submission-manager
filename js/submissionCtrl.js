@@ -281,7 +281,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       // Rows before the diff
       for (iRow = 0; iRow < realdiffRow; iRow++) {
          resSol += rowsSol[iRow]+'\n';
-         resExp += rowsSol[iRow]+'\n';
+         resExp += rowsExp[iRow]+'\n';
       }
 
       // Row with the diff
@@ -303,8 +303,10 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       resExp += realdiffRow < rowsExp.length ? (rowsExp[realdiffRow]+'\n') : '';
 
       // Rows after the diff
-      for (iRow = realdiffRow+1; iRow < Math.max(rowsSol.length, rowsExp.length); iRow++) {
+      for (iRow = realdiffRow+1; iRow < rowsSol.length; iRow++) {
          resSol += iRow < rowsSol.length ? (rowsSol[iRow]+'\n') : '';
+      }
+      for (iRow = realdiffRow+1; iRow < rowsExp.length; iRow++) {
          resExp += iRow < rowsExp.length ? (rowsExp[iRow]+'\n') : '';
       }
 
