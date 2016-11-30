@@ -26,10 +26,16 @@ angular.module('submission-manager').directive('animation', function()
             if (args[0] == $scope.idtest && !hasLoadedSimulation[$scope.idtest])
             {
                hasLoadedSimulation[$scope.idtest] = true;
-               if (typeof animationFeatures !== 'undefined') {
-                  simulationInstance(selector, animationFeatures(selector), $scope.commands);
+               if (typeof taskSettings.animationFeatures !== 'undefined') {
+                  if (fioiVideoPlayers.hasOwnProperty('successPlayer') && fioiVideoPlayers['successPlayer'].isPlaying) {
+                     simulationToVideo(fioiVideoPlayers['successPlayer'], 0, selector, taskSettings.animationFeatures(selector), $scope.commands);
+                  } else if (fioiVideoPlayers.hasOwnProperty('failurePlayer') && fioiVideoPlayers['failurePlayer'].isPlaying) {
+                     simulationToVideo(fioiVideoPlayers['failurePlayer'], 0, selector, taskSettings.animationFeatures(selector), $scope.commands);
+                  } else {
+                     simulationInstance(selector, taskSettings.animationFeatures(selector), $scope.commands);
+                     $('.restart').trigger('click');
+                  }
                }
-               $('.restart').trigger('click');
             }
          });
       },
@@ -58,6 +64,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
    $scope.showSubmission = true;
    $scope.showDetailsTests = false; // Used when there are no subtasks.
    $scope.hasLoadedAnim = false;
+   $scope.hasAnimation = (typeof taskSettings.animationFeatures !== 'undefined');
 
    SyncQueue.addSyncEndListeners("submissionController.apply", function () {
       if ($scope.submission)
@@ -68,9 +75,6 @@ angular.module('submission-manager').controller('submissionController', ['$scope
             $scope.idShown = idShown;
          }
          $scope.configureLogsError($scope.submission.tests);
-         if (typeof animationFeatures !== 'undefined') {
-           $scope.hasAnimation = true;
-         } else { $scope.hasAnimation = false; }
       }
       $scope.loading = false;
 
@@ -122,6 +126,11 @@ angular.module('submission-manager').controller('submissionController', ['$scope
    {
       var idApplied = -1;
       var hasFoundAnError,iTest,curTest;
+
+      if(typeof taskSettings !== 'undefined' && typeof taskSettings.evaluationCallback !== 'undefined') {
+         taskSettings.evaluationCallback(submission);
+      }
+
       // If there are subtasks in this problem
       if (submission.submissionSubtasks && submission.submissionSubtasks.length > 0)
       {
