@@ -26,7 +26,7 @@ angular.module('submission-manager').directive('animation', function()
             if (args[0] == $scope.idtest && !hasLoadedSimulation[$scope.idtest])
             {
                hasLoadedSimulation[$scope.idtest] = true;
-               if (typeof taskSettings.animationFeatures !== 'undefined') {
+               if (typeof taskSettings !== 'undefined' && typeof taskSettings.animationFeatures !== 'undefined') {
                   if (fioiVideoPlayers.hasOwnProperty('successPlayer') && fioiVideoPlayers['successPlayer'].isPlaying) {
                      simulationToVideo(fioiVideoPlayers['successPlayer'], 0, selector, taskSettings.animationFeatures(selector), $scope.commands);
                   } else if (fioiVideoPlayers.hasOwnProperty('failurePlayer') && fioiVideoPlayers['failurePlayer'].isPlaying) {
@@ -64,7 +64,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
    $scope.showSubmission = true;
    $scope.showDetailsTests = false; // Used when there are no subtasks.
    $scope.hasLoadedAnim = false;
-   $scope.hasAnimation = (typeof taskSettings.animationFeatures !== 'undefined');
+   $scope.hasAnimation = (typeof taskSettings !== 'undefined' && typeof taskSettings.animationFeatures !== 'undefined');
 
    SyncQueue.addSyncEndListeners("submissionController.apply", function () {
       if ($scope.submission)
