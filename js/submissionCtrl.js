@@ -358,6 +358,11 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       return Math.floor(val);
    };
 
+   $scope.minzero = function(val)
+   {
+      return (val < 0 ? '0.00' : val);
+   };
+
    $scope.firstCharDiff = function(inputStr, expectedStr)
    {
       var result = "";

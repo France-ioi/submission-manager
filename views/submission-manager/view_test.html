@@ -6,7 +6,7 @@
          <span ng-if="curTest.test_sGroupType !== 'Evaluation'">{{curTest.test_sName}} &nbsp; &nbsp;</span>
       </span>
       <span class="resultTest {{submissionManager.getClassTest(ERROR_RelativeScore)}}">
-         Score partiel de {{curTest.iScore}}% en {{floor(curTest.iTimeMs/10)/100}} s
+         Score partiel de {{curTest.iScore}}% en {{minzero(floor(curTest.iTimeMs/10)/100)}} s
       </span>
    </p>
    <p ng-click="clickTest(curTest.ID)" ng-if="!(curTest.iScore > 0 && curTest.iScore < 100)" ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)" class="heading_test">
@@ -16,10 +16,10 @@
          <span ng-if="curTest.test_sGroupType !== 'Evaluation'">{{curTest.test_sName}} &nbsp; &nbsp;</span>
       </span>
       <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="ok">
-         Réponse correcte en {{floor(curTest.iTimeMs/10)/100}} s
+         Réponse correcte en {{minzero(floor(curTest.iTimeMs/10)/100)}} s
       </span>
       <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="error">
-         Réponse incorrecte
+         Réponse incorrecte en {{minzero(floor(curTest.iTimeMs/10)/100)}} s
       </span>
       <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="errorNoLog">
          Erreur dans le résultat
