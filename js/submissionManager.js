@@ -65,7 +65,12 @@ var submissionManager = {
 
    getDataTest : function(iErrorCode)
    {
-      var res = null;
+      // Default to error
+      var res = {
+         status: 'otherError',
+         classToApply: 'crash_test',
+         classImage: 'glyphicon glyphicon-fire image_crash_test',
+      };
       switch (iErrorCode)
       {
          case this.errorCode.ERROR_NoError:

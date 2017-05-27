@@ -39,6 +39,9 @@
       <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="timeout">
          Limite de temps dépassée
       </span>
+      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="otherError">
+         Erreur d'exécution
+      </span>
    </p>
 
 </uib-accordion-heading>
@@ -116,6 +119,10 @@
             <li>soit il est trop lent pour passer ce test dans la limite de temps du sujet.</li>
             <li>soit il boucle indéfiniment et ne se termine jamais.</li>
          </ul>
+      </span>
+      <span ng-switch-when="otherError">
+         Votre programme ne s'est pas terminé correctement, et l'évaluation n'a pas pu déterminer le type d'erreur.<br />
+         Cela peut se produire si votre programme se termine avec un code de sortie non classique, ou lors d'un dépassement des limites de temps et de mémoire autorisés.
       </span>
       <span ng-switch-default>
          Un problème a eu lieu lors de la récupération des informations concernant le test.
