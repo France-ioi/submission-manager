@@ -275,6 +275,7 @@
 }
 
 .errorInLog {
-   background-color:red;
-   color:white;
+   background-color: red;
+   color: white;
+   font-weight: 900;
 }
