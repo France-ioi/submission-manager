@@ -128,7 +128,7 @@
          Un problème a eu lieu lors de la récupération des informations concernant le test.
       </span>
    </div>
-   <div ng-if="curTest.sErrorMsg">
+   <div ng-if="curTest.sErrorMsg && (submissionManager.getStatusTest(curTest.iErrorCode) == 'error' || submissionManager.getStatusTest(curTest.iErrorCode) == 'otherError')">
       Votre programme a renvoyé une erreur lors de l'évaluation :
       <pre>{{curTest.sErrorMsg}}</pre>
    </div>
