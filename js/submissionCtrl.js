@@ -49,7 +49,7 @@ function addScript (str)
    $('head').append('<script type="text/javascript">' + str + '</script>');
 }
 
-angular.module('submission-manager').controller('submissionController', ['$scope', '$sce', function($scope, $sce)
+angular.module('submission-manager').controller('submissionController', ['$scope', '$sce', '$rootScope', function($scope, $sce, $rootScope)
 {
    $scope.submissionManager = submissionManager;
    $scope.submissionManager.initConstants($scope);
@@ -126,6 +126,14 @@ angular.module('submission-manager').controller('submissionController', ['$scope
    {
       var idApplied = -1;
       var hasFoundAnError,iTest,curTest;
+
+      if($rootScope.curSubmissionLang) {
+         submission.sourceLang = $rootScope.curSubmissionLang;
+      } else if(submission.sourceCode && submission.sourceCode.params && submission.sourceCode.params.sLangProg) {
+         submission.sourceLang = submission.sourceCode.params.sLangProg;
+      } else {
+         submission.sourceLang = '';
+      }
 
       if(typeof taskSettings !== 'undefined' && typeof taskSettings.evaluationCallback !== 'undefined') {
          taskSettings.evaluationCallback(submission);
