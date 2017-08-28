@@ -2,53 +2,39 @@
    <p ng-click="clickTest(curTest.ID)" ng-if="curTest.iScore > 0 && curTest.iScore < 100" class="heading_test"> <!-- i.e relative score -->
       <span class="idTest">
          <span ng-include src="'submission-manager/image_test.html'" class="imageTest"></span>
-         <span ng-if="curTest.test_sGroupType == 'Evaluation'">Test n°{{$index+1}} &nbsp; &nbsp;</span>
+         <span ng-if="curTest.test_sGroupType == 'Evaluation'"><span ng-i18next="submission_test_number"></span>{{$index+1}} &nbsp; &nbsp;</span>
          <span ng-if="curTest.test_sGroupType !== 'Evaluation'">{{curTest.test_sName}} &nbsp; &nbsp;</span>
       </span>
       <span class="resultTest {{submissionManager.getClassTest(ERROR_RelativeScore)}}">
-         Score partiel de {{curTest.iScore}}% en {{minzero(floor(curTest.iTimeMs/10)/100)}} s
+         <span ng-i18next="submission_score_partial"></span> {{curTest.iScore}}% <span ng-i18next="submission_score_partial_in"></span> {{minzero(floor(curTest.iTimeMs/10)/100)}} s
       </span>
    </p>
    <p ng-click="clickTest(curTest.ID)" ng-if="!(curTest.iScore > 0 && curTest.iScore < 100)" ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)" class="heading_test">
       <span class="idTest">
          <span ng-include src="'submission-manager/image_test.html'" class="imageTest"></span>
-         <span ng-if="curTest.test_sGroupType == 'Evaluation'">Test n°{{$index+1}} &nbsp; &nbsp;</span>
+         <span ng-if="curTest.test_sGroupType == 'Evaluation'"><span ng-i18next="submission_test_number"></span>{{$index+1}} &nbsp; &nbsp;</span>
          <span ng-if="curTest.test_sGroupType !== 'Evaluation'">{{curTest.test_sName}} &nbsp; &nbsp;</span>
       </span>
       <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="ok">
-         Réponse correcte en {{minzero(floor(curTest.iTimeMs/10)/100)}} s
+        <span ng-i18next="submission_result_correct"></span> {{minzero(floor(curTest.iTimeMs/10)/100)}} s
       </span>
       <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="error">
-         Réponse incorrecte en {{minzero(floor(curTest.iTimeMs/10)/100)}} s
+        <span ng-i18next="submission_result_wrong"></span> {{minzero(floor(curTest.iTimeMs/10)/100)}} s
       </span>
-      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="errorNoLog">
-         Erreur dans le résultat
-      </span>
-      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="abort">
-         Abort
-      </span>
-      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="busError">
-         Bus Error
-      </span>
-      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="floatingPointExpression">
-         Floating point Expression
-      </span>
-      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="memory">
-         Accès mémoire invalide
-      </span>
-      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="timeout">
-         Limite de temps dépassée
-      </span>
-      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="otherError">
-         Erreur d'exécution
-      </span>
+      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="errorNoLog" ng-i18next="submission_result_nolog"></span>
+      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="abort" ng-i18next="submission_result_abort"></span>
+      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="busError" ng-i18next="submission_result_buserror"></span>
+      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="floatingPointExpression" ng-i18next="submission_result_floating"></span>
+      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="memory" ng-i18next="submission_result_memory"></span>
+      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="timeout" ng-i18next="submission_result_timeout"></span>
+      <span class="resultTest {{submissionManager.getClassTest(curTest.iErrorCode)}}" ng-switch-when="otherError" ng-i18next="submission_result_other"></span>
    </p>
 
 </uib-accordion-heading>
 <!--<td ng-switch="curTest.iErrorCode">-->
 
 <div ng-if="curTest.iScore > 0 && curTest.iScore < 100" class="output"> <!-- i.e relative score -->
-   Vous avez obtenu un score partiel. Vous pouvez améliorer votre programme pour augmenter votre score.
+   <span ng-i18next="submission_score_partial_description"></span>
    <div ng-if="(curTest.sLog || curTest.jFiles) && !hasAnimation">
       <div ng-bind-html="toTrust(getLog(curTest))"></div>
    </div>
@@ -58,78 +44,58 @@
 
 <div ng-if="!(curTest.iScore > 0 && curTest.iScore < 100) && !(curTest.sOutput != '' && hasLoadedAnimation)" class="output">
    <div ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)">
-      <span ng-switch-when="ok">
-         Bravo, votre programme a validé ce test.
-      </span>
+      <span ng-switch-when="ok" ng-i18next="submission_congratulations"></span>
       <span ng-switch-when="error">
          <span ng-if="displayError(curTest.ID) && curTest.sOutput.length == 0"> <!-- We use datas in tm_submissions to display log errors if there's nothing in tm_submissions_tests -->
-            Votre programme a renvoyé :<br/>
+            <span ng-i18next="submission_display_program"></span><br/>
             <pre class="log">{{submission.sFirstUserOutput}}</pre>
 
-            Il aurait dû renvoyer :<br/>
+            <span ng-i18next="submission_display_expected"></span><br/>
             <pre class="log">{{submission.sFirstExpectedOutput}}</pre>
 
             <span ng-show="curTest.iErrorCode == ERROR_WrongAnswer"> <!-- diff shall not be shown when iErrorCode = ERROR_WrongAnswerBis -->
-               Pour vous aider, voici le premier caractère différent : <br />
+               <span ng-i18next="submission_display_firstdiff"></span><br />
                <pre class="log" ng-bind-html="toTrust(firstCharDiff(submission.sFirstUserOutput, submission.sFirstExpectedOutput))"></pre>
             </span>
          </span>
          <span ng-if="displayError(curTest.ID) && curTest.sOutput.length > 0"> <!-- Otherwise, we use datas in tm_submissions_tests -->
-            Votre programme a renvoyé :<br/>
+            <span ng-i18next="submission_display_program"></span><br/>
             <pre class="log">{{curTest.sOutput}}</pre>
 
-            Il aurait dû renvoyer :<br/>
+            <span ng-i18next="submission_display_expected"></span><br/>
             <pre class="log">{{curTest.sExpectedOutput}}</pre>
             <span ng-show="curTest.iErrorCode == ERROR_WrongAnswer"> <!-- diff shall not be shown when iErrorCode = ERROR_WrongAnswerBis -->
-               Pour vous aider, voici le premier caractère différent : <br />
+               <span ng-i18next="submission_display_firstdiff"></span><br />
                <pre class="log" ng-bind-html="toTrust(firstCharDiff(curTest.sOutput, curTest.sExpectedOutput))"></pre>
             </span>
          </span>
-         <span ng-if="!displayError(curTest.ID) && !curTest.sLog && !curTest.jFiles && !curTest.sErrorMsg">
-            Aucun log n'est disponible pour ce test.
-         </span>
+         <span ng-if="!displayError(curTest.ID) && !curTest.sLog && !curTest.jFiles && !curTest.sErrorMsg" ng-i18next="submission_display_nolog"></span>
       </span>
       <span ng-switch-when="errorNoLog">
          <pre ng-show="displayError(curTest.ID) && curTest.sOutput.length > 0" class="log">{{curTest.sOutput}}</pre>
       </span>
-      <span ng-switch-when="abort">
-         Votre programme a retourné un <code>Abort</code>.
-         En C++, il peut s'agir d'une exception non traitée par votre programme.
-      </span>
-      <span ng-switch-when="busError">
-         Votre programme a retourné un <code>Bus Error</code>.
-         Il peut s'agir d'un problème lié à l'utilisation de pointeurs.
-      </span>
-      <span ng-switch-when="floatingPointExpression">
-         Votre programme s'est terminé par un <code>floating point exception</code>.
-         Il a probablement tenté d'effectuer une division par zéro.
-      </span>
+      <span ng-switch-when="abort" ng-i18next="submission_result_abort_description"></span>
+      <span ng-switch-when="busError" ng-i18next="submission_result_buserror_description"></span>
+      <span ng-switch-when="floatingPointExpression" ng-i18next="submission_result_floating_description"></span>
       <span ng-switch-when="memory">
-         Votre programme a échoué à la suite d'un accès mémoire en dehors des zones réservées, ou d'un dépassement de la limite de mémoire.<br />
-         Votre programme s'est terminé à la suite d'une erreur. Cela peut venir d'une des raisons suivantes :
+         <span ng-i18next="submission_result_memory_description"></span>
          <ul>
-            <li>Votre programme a dépassé la limite de mémoire autorisée pour ce problème, que ce soit sous la forme de variables statiques, d'allocations dynamiques, ou bien de la pile.</li>
-            <li>Votre programme a tenté de faire un accès mémoire en dehors des zones allouées.</li>
+            <li ng-i18next="submission_result_memory_description_reason1"></li>
+            <li ng-i18next="submission_result_memory_description_reason2"></li>
          </ul>
       </span>
       <span ng-switch-when="timeout">
-         Votre programme a dépassé la limite de temps.<br />
-         Cela peut venir de deux raisons :
+         <span ng-i18next="submission_result_timeout_description"></span>
          <ul>
-            <li>soit il est trop lent pour passer ce test dans la limite de temps du sujet.</li>
-            <li>soit il boucle indéfiniment et ne se termine jamais.</li>
+            <li ng-i18next="submission_result_timeout_description_reason1"></li>
+            <li ng-i18next="submission_result_timeout_description_reason2"></li>
          </ul>
       </span>
-      <span ng-switch-when="otherError">
-         Votre programme ne s'est pas terminé correctement, et l'évaluation n'a pas pu déterminer le type d'erreur.<br />
-         Cela peut se produire si votre programme se termine avec un code de sortie non classique, ou lors d'un dépassement des limites de temps et de mémoire autorisés.
-      </span>
-      <span ng-switch-default>
-         Un problème a eu lieu lors de la récupération des informations concernant le test.
-      </span>
+      <span ng-switch-when="otherError" ng-i18next="submission_result_other_description"></span>
+      <span ng-switch-default ng-i18next="submission_result_default_description"></span>
    </div>
    <div ng-if="curTest.sErrorMsg && (submissionManager.getStatusTest(curTest.iErrorCode) == 'error' || submissionManager.getStatusTest(curTest.iErrorCode) == 'otherError')">
-      Votre programme a renvoyé une erreur lors de l'évaluation :
+      <span ng-i18next="submission_program_error"></span>
       <pre>{{curTest.sErrorMsg}}</pre>
    </div>
    <div ng-if="(curTest.sLog || curTest.jFiles) && !hasAnimation">

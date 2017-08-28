@@ -7,31 +7,27 @@
             </uib-accordion-heading>
             <div ng-if="submission != undefined && !submission.bEvaluated && !loading" class="submission_global">
                <div class="submission_error">
-                  <p>
-                    Cette soumission est en train d'être évaluée.
-                  </p>
+                  <p ng-i18next="submission_evaluation_description"></p>
                </div>
             </div>
             <div ng-if="submission.bEvaluated">
                <div ng-show="submission.bCompilError" class="submission_error">
                   <div ng-if="submission.sCompilMsg">
-                      <strong>Erreur de compilation :</strong><br />
+                      <strong ng-i18next="submission_error_compilation"></strong><br />
                       <pre>{{submission.sCompilMsg}}</pre>
                   </div>
                   <div ng-if="!submission.sCompilMsg">
-                      <strong>Erreur d'exécution :</strong><br />
+                      <strong ng-i18next="submission_error_execution"></strong><br />
                       <pre>{{submission.sErrorMsg}}</pre>
                   </div>
                </div>
 
                <div ng-show="!(submission.tests.length > 0) && !submission.bCompilError && submission.bEvaluated" class="submission_error">
-                  <p>
-                     Il n'existe pas de tests pour ce problème.
-                  </p>
+                  <p ng-i18next="submission_notests"></p>
                </div>
                <div ng-hide="!submission.bEvaluated || submission.bCompilError" ng-if="submission.tests.length > 0">
                   <div ng-if="submission.sCompilMsg.length > 0" class="compil_error">
-                     Résultat de la compilation :
+                     <span ng-i18next="submission_compilation_output"></span>
                      <pre>{{submission.sCompilMsg}}</pre>
                   </div>
                   <div ng-if="submission.submissionSubtasks.length > 0">

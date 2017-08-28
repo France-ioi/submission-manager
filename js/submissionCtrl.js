@@ -1,4 +1,4 @@
-angular.module('submission-manager', []);
+angular.module('submission-manager', ['jm.i18next']);
 
 angular.module('submission-manager').directive('animation', function()
 {
@@ -49,7 +49,7 @@ function addScript (str)
    $('head').append('<script type="text/javascript">' + str + '</script>');
 }
 
-angular.module('submission-manager').controller('submissionController', ['$scope', '$sce', '$rootScope', function($scope, $sce, $rootScope)
+angular.module('submission-manager').controller('submissionController', ['$scope', '$sce', '$rootScope', '$i18next', function($scope, $sce, $rootScope, $i18next)
 {
    $scope.submissionManager = submissionManager;
    $scope.submissionManager.initConstants($scope);
@@ -331,11 +331,11 @@ angular.module('submission-manager').controller('submissionController', ['$scope
          resSol += '... ';
          resExp += '... ';
       }
-      res =  'Votre programme a affiché :<br>\n';
+      res =  $i18next.t('output_program') + '<br>\n';
       res += '<pre>'+resSol+'</pre>';
-      res += 'alors que la réponse attendue était :<br>\n';
+      res += $i18next.t('output_expected') + '<br>\n';
       res += '<pre>'+resExp+'</pre>';
-      res += 'Pour vous aider, le premier caractère différent est mis sur fond rouge.<br><br>Vérifiez bien que vous affichez exactement ce qui est demandé et rien de plus. Vérifiez aussi les retours à la ligne.';
+      res += $i18next.t('output_help');
       return res;
    }
 
@@ -351,7 +351,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
          function htmlEntities(str) {
             return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
          }
-         return 'Réponse de l\'évaluation :<pre>'+htmlEntities(sLog)+'</pre>';
+         return $i18next.t('evaluation_answer') + '<pre>'+htmlEntities(sLog)+'</pre>';
       }
       return getDiffHtmlFromLog(sLogParsed);
    };

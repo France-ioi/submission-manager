@@ -8,7 +8,7 @@
 
       <span class="subtask_data">
          <span>
-            Tests validés : {{countTestsSucceeded(submissionSubtask)}} / {{submissionSubtask.submissionTests.length}}
+            <span ng-i18next="submission_validated_tests"></span> {{countTestsSucceeded(submissionSubtask)}} / {{submissionSubtask.submissionTests.length}}
             <span class="subtask_min_test">
                <span ng-repeat="curTest in submissionSubtask.submissionTests" ng-include src="'submission-manager/view_test_min.html'"  class="disp_min"></span>
             </span>
@@ -16,7 +16,7 @@
       </span>
 
       <span class="score">
-         Score : {{submissionSubtask.iScore}} / {{submissionSubtask.subtask_iPointsMax}}
+         <span ng-i18next="submission_score"></span> {{submissionSubtask.iScore}} / {{submissionSubtask.subtask_iPointsMax}}
       </span>
    </div>
 </uib-accordion-heading>

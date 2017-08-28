@@ -4,24 +4,23 @@
       <span class="glyphicon glyphicon-ok image_succeed_task checkImage" ng-show="submission.bEvaluated && submission.bSuccess"></span>
       <span class="glyphicon glyphicon-remove image_failure_task checkImage" ng-show="submission.bEvaluated && !submission.bSuccess"></span>
       <span ng-show="submission.bEvaluated">
-         Soumission en {{submission.sourceLang}}
-         le {{submission.sDate | date:'dd/MM/yyyy à HH:mm'}}
+         <span ng-i18next="submission_lang"></span> {{submission.sourceLang}}
+         <span ng-i18next="submission_date"></span> {{submission.sDate | date:'dd/MM/yyyy, HH:mm'}}
       </span>
-      <span ng-show="!submission.bEvaluated">
-         Soumission en cours d'évaluation...
+      <span ng-show="!submission.bEvaluated" ng-i18next="submission_evaluation">
       </span>
    </span>
 
    <span class="submission_span submission_data"> <!-- centered data -->
    </span>
-   <span class="submission_span score" ng-if="submission.bEvaluated">Score : {{submission.iScore}} %</span>
-   <span class="submission_span score" ng-if="!submission.bEvaluated">Évaluation en cours...</span>
+   <span class="submission_span score" ng-if="submission.bEvaluated"><span ng-i18next="submission_score"></span> {{submission.iScore}} %</span>
+   <span class="submission_span score" ng-if="!submission.bEvaluated" ng-i18next="submission_evaluation"></span>
 
    <br>
 
    <span class="submission_details" ng-if="submission.bEvaluated">
-      <span ng-if="submission.submissionSubtasks.length > 0">Sous-tâches validées : {{submissionManager.countSubtasksSucceeded(submission)}} / {{submission.submissionSubtasks.length}}</span>
-      <span ng-if="submission.submissionSubtasks.length == 0">Tests validés : {{submission.nbTestsPassed}} / {{submission.nbTestsTotal}}</span>
+      <span ng-if="submission.submissionSubtasks.length > 0"><span ng-i18next="submission_validated_subtasks"></span> {{submissionManager.countSubtasksSucceeded(submission)}} / {{submission.submissionSubtasks.length}}</span>
+      <span ng-if="submission.submissionSubtasks.length == 0"><span ng-i18next="submission_validated_tests"></span> {{submission.nbTestsPassed}} / {{submission.nbTestsTotal}}</span>
       &nbsp;&nbsp;
       <span class="submission_min_test disp_min" ng-if="!submission.submissionSubtasks" ng-repeat="curTest in submission.tests" ng-include src="'submission-manager/view_test_min.html'"></span>
       <span class="submission_min_test" ng-if="submission.submissionSubtasks" ng-repeat="submissionSubtask in submission.submissionSubtasks">
