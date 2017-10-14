@@ -5,7 +5,7 @@
       <span class="glyphicon glyphicon-remove image_failure_task checkImage" ng-show="submission.bEvaluated && !submission.bSuccess"></span>
       <span ng-show="submission.bEvaluated">
          <span ng-i18next="submission_lang"></span> {{submission.sourceLang}}
-         <span ng-i18next="submission_date"></span> {{submission.sDate | date:'dd/MM/yyyy, HH:mm'}}
+         <span ng-i18next="submission_date"></span> {{submission.sDate | date:'short' }}
       </span>
       <span ng-show="!submission.bEvaluated" ng-i18next="submission_evaluation">
       </span>
