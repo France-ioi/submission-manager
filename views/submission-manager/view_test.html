@@ -94,11 +94,14 @@
       <span ng-switch-when="otherError" ng-i18next="submission_result_other_description"></span>
       <span ng-switch-default ng-i18next="submission_result_default_description"></span>
    </div>
-   <div ng-if="curTest.sErrorMsg && (submissionManager.getStatusTest(curTest.iErrorCode) == 'error' || submissionManager.getStatusTest(curTest.iErrorCode) == 'otherError')">
+   <div ng-if="curTest.bNoFeedback">
+      <span ng-i18next="submission_no_feedback"></span>
+   </div>
+   <div ng-if="curTest.sErrorMsg && !curTest.bNoFeedback && (submissionManager.getStatusTest(curTest.iErrorCode) == 'error' || submissionManager.getStatusTest(curTest.iErrorCode) == 'otherError')">
       <span ng-i18next="submission_program_error"></span>
       <pre>{{curTest.sErrorMsg}}</pre>
    </div>
-   <div ng-if="(curTest.sLog || curTest.jFiles) && !hasAnimation">
+   <div ng-if="(curTest.sLog || curTest.jFiles) && !curTest.bNoFeedback && !hasAnimation">
       <div ng-bind-html="toTrust(getLog(curTest))"></div>
    </div>
 </div>
