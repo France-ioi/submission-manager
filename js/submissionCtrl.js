@@ -339,21 +339,33 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       return res;
    }
 
+   function htmlEntities(str) {
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+   }
+
    $scope.getLog = function(curTest) {
       var evalFun = curTest.submission.task.displayChecker;
       if (evalFun) {
          return evalFun(curTest);
       }
       var sLog = curTest.sLog;
+      var sLogSplit = sLog.split(/[\r\n]+/, 2);
+      var sLogDiff = null;
       try {
-         var sLogParsed = JSON.parse(sLog);
-      } catch (e) {
-         function htmlEntities(str) {
-            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+         // Check if first line of the log is JSON data containing a diff
+         var sLogParsed = JSON.parse(sLogSplit[0]);
+         sLogDiff = getDiffHtmlFromLog(sLogParsed);
+      } catch (e) {}
+
+      if(sLogDiff) {
+         if(sLogSplit.length > 1) {
+            return $i18next.t('evaluation_answer') + '<pre>'+htmlEntities(sLogSplit[1])+'</pre>' + sLogDiff;
+         } else {
+            return sLogDiff;
          }
+      } else {
          return $i18next.t('evaluation_answer') + '<pre>'+htmlEntities(sLog)+'</pre>';
       }
-      return getDiffHtmlFromLog(sLogParsed);
    };
 
    $scope.round = function(val)
