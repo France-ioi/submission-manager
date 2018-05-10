@@ -358,7 +358,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       } catch (e) {}
 
       if(sLogDiff) {
-         if(sLogSplit.length > 1) {
+         if(sLogSplit.length > 1 && sLogSplit[1]) {
             return $i18next.t('evaluation_answer') + '<pre>'+htmlEntities(sLogSplit[1])+'</pre>' + sLogDiff;
          } else {
             return sLogDiff;
