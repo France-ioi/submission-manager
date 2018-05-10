@@ -349,17 +349,18 @@ angular.module('submission-manager').controller('submissionController', ['$scope
          return evalFun(curTest);
       }
       var sLog = curTest.sLog;
-      var sLogSplit = sLog.split(/[\r\n]+/, 2);
+      var sLogSplit = sLog.split(/\n\r|\r\n|\r|\n/);
       var sLogDiff = null;
       try {
          // Check if first line of the log is JSON data containing a diff
-         var sLogParsed = JSON.parse(sLogSplit[0]);
+         var sLogParsed = JSON.parse(sLogSplit.shift());
          sLogDiff = getDiffHtmlFromLog(sLogParsed);
       } catch (e) {}
 
       if(sLogDiff) {
-         if(sLogSplit.length > 1 && sLogSplit[1]) {
-            return $i18next.t('evaluation_answer') + '<pre>'+htmlEntities(sLogSplit[1])+'</pre>' + sLogDiff;
+         var sLogJoined = sLogSplit.join("\n");
+         if(sLogJoined) {
+            return $i18next.t('evaluation_answer') + '<pre>'+htmlEntities(sLogJoined)+'</pre>' + sLogDiff;
          } else {
             return sLogDiff;
          }
