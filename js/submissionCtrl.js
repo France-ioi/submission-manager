@@ -49,7 +49,7 @@ function addScript (str)
    $('head').append('<script type="text/javascript">' + str + '</script>');
 }
 
-angular.module('submission-manager').controller('submissionController', ['$scope', '$sce', '$rootScope', '$i18next', function($scope, $sce, $rootScope, $i18next)
+angular.module('submission-manager').controller('submissionController', ['$scope', '$sce', '$rootScope', '$i18next', '$sanitize', function($scope, $sce, $rootScope, $i18next, $sanitize)
 {
    $scope.submissionManager = submissionManager;
    $scope.submissionManager.initConstants($scope);
@@ -364,6 +364,8 @@ angular.module('submission-manager').controller('submissionController', ['$scope
          } else {
             return sLogDiff;
          }
+      } else if(sLog && sLog[0] == '<') {
+         return $i18next.t('evaluation_answer') + '<br>' + $sanitize(sLog);
       } else {
          return $i18next.t('evaluation_answer') + '<pre>'+htmlEntities(sLog)+'</pre>';
       }
