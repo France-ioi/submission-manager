@@ -344,11 +344,14 @@ angular.module('submission-manager').controller('submissionController', ['$scope
    }
 
    $scope.getLog = function(curTest) {
+      // Transforms the evaluation log into a human-readable format
       var evalFun = curTest.submission.task.displayChecker;
       if (evalFun) {
          return evalFun(curTest);
       }
       var sLog = curTest.sLog;
+      if(!sLog) { return ''; }
+
       var sLogSplit = sLog.split(/\n\r|\r\n|\r|\n/);
       var sLogDiff = null;
       try {
