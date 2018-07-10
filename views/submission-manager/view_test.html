@@ -69,7 +69,10 @@
                <pre class="log" ng-bind-html="toTrust(firstCharDiff(curTest.sOutput, curTest.sExpectedOutput))"></pre>
             </span>
          </span>
-         <span ng-if="!displayError(curTest.ID) && !curTest.sLog && !curTest.jFiles && !curTest.sErrorMsg" ng-i18next="submission_display_nolog"></span>
+         <span ng-if="!displayError(curTest.ID) && !curTest.sLog && !curTest.jFiles && !curTest.sErrorMsg">
+            <span ng-i18next="submission_display_nolog_errorcode"></span> {{ curTest.iErrorCode }}.
+            <span ng-i18next="submission_display_nolog"></span>
+         </span>
       </span>
       <span ng-switch-when="errorNoLog">
          <pre ng-show="displayError(curTest.ID) && curTest.sOutput.length > 0" class="log">{{curTest.sOutput}}</pre>
