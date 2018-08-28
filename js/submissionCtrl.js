@@ -127,7 +127,7 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       var idApplied = -1;
       var hasFoundAnError,iTest,curTest;
 
-      if($rootScope.curSubmissionLang) {
+      if($rootScope.curSubmissionLang || $rootScope.curSubmissionLang === '') {
          submission.sourceLang = $rootScope.curSubmissionLang;
       } else if(submission.sourceCode && submission.sourceCode.params && submission.sourceCode.params.sLangProg) {
          submission.sourceLang = submission.sourceCode.params.sLangProg;
