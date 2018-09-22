@@ -153,21 +153,26 @@ angular.module('submission-manager').controller('submissionController', ['$scope
                subtask.cached = [];
                subtask.cached.showDetailsTests = false;
 
+               var minRank = Infinity;
+               var minRankTest = null;
+
                for (iTest = 0; iTest < subtask.submissionTests.length; iTest++) // Nevertheless, if we find a test that has an error, we automatically display it
                {
                   curTest = subtask.submissionTests[iTest];
-                  curTest.cached = [];
+                  curTest.cached = {isShown: false};
                   if (submissionManager.getStatusTest(curTest.iErrorCode) != 'ok' && !hasFoundAnError) // We'll automatically display both the subtask and the test
                   {
                      subtask.cached.showDetailsTests = true;
-                     curTest.cached.isShown = true;
-                     hasFoundAnError = true;
-                     idApplied = curTest.ID;
+                     if(curTest.test_iRank < minRank) {
+                        minRank = curTest.test_iRank;
+                        minRankTest = curTest;
+                     }
                   }
-                  else
-                  {
-                     curTest.cached.isShown = false;
-                  }
+               }
+               if(minRankTest) {
+                  minRankTest.cached.isShown = true;
+                  idApplied = minRankTest.ID;
+                  hasFoundAnError = true;
                }
             }
             else // Already set
