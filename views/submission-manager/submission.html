@@ -5,6 +5,7 @@
             <uib-accordion-heading>
                <div ng-include src="'submission-manager/header_template.html'"></div>
             </uib-accordion-heading>
+            <div ng-show="submission.sMode == 'UserTest'" class="alert alert-warning"><b ng-i18next="submission_usertest_warning"></b></div>
             <div ng-if="submission != undefined && !submission.bEvaluated && !loading" class="submission_global">
                <div class="submission_error">
                   <p ng-i18next="submission_evaluation_description"></p>

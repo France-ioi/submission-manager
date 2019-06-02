@@ -108,3 +108,9 @@
       <div ng-bind-html="toTrust(getLog(curTest))"></div>
    </div>
 </div>
+
+<div ng-if="curTest.submission.sMode == 'UserTest'">
+    <a ng-click="displayOutput()" ng-i18next="submission_program_full_output_display" ng-hide="displayOutputDetails"></a>
+    <span ng-show="displayOutputDetails" ng-i18next="submission_program_full_output"></span>
+    <pre ng-show="displayOutputDetails">{{curTest.sOutput}}</pre>
+</div>

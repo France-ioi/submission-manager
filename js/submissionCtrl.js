@@ -450,7 +450,12 @@ angular.module('submission-manager').controller('submissionController', ['$scope
 
    $scope.clickTest = function(idTest)
    {
+      $scope.displayOutputDetails = false;
       var arg = [idTest];
       $scope.$broadcast("clickOnTest", arg);
+   };
+
+   $scope.displayOutput = function() {
+      $scope.displayOutputDetails = true;
    };
 }]);
