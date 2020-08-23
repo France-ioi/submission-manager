@@ -398,6 +398,9 @@ angular.module('submission-manager').controller('submissionController', ['$scope
    $scope.displayPyfeBlocks = function(blockIds) {
       window.highlightBlocklyBlocks(blockIds);
       $('html, body').animate({scrollTop: "0px"});
+      if(window.platform) {
+         window.platform.updateDisplay({scrollTop: 0});
+      }
    };
 
    $scope.round = function(val)
