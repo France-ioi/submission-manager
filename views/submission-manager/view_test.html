@@ -42,7 +42,18 @@
 
 <div ng-if="curTest.sLog != '' && hasAnimation" class="output" animation commands="curTest.sLog" idtest="curTest.ID"></div>
 
-<div ng-if="!(curTest.iScore > 0 && curTest.iScore < 100) && !(curTest.sOutput != '' && hasLoadedAnimation)" class="output">
+<div ng-switch="hasSpecialTestOutput(curTest)">
+    <span ng-switch-when="pyFrenchErrors">
+        <p><span ng-i18next="submission_pyfe_message"></span> {{ curTest.pyfeJson.messageId }}.</p>
+        <button class="btn btn-primary" ng-click="displayPyfeBlocks(curTest.pyfeJson.blockIds)" ng-i18next="submission_pyfe_view_blocks"></button>
+        <hr>
+        <p style="white-space: pre-wrap;">{{ curTest.pyfeJson.text }}</p>
+        <p ng-i18next="submission_pyfe_error"></p>
+        <pre>{{ curTest.pyfeJson.stderr }}</pre>
+    </span>
+</div>
+
+<div ng-if="!hasSpecialTestOutput(curTest) && !(curTest.iScore > 0 && curTest.iScore < 100) && !(curTest.sOutput != '' && hasLoadedAnimation)" class="output">
    <div ng-switch="submissionManager.getStatusTest(curTest.iErrorCode)">
       <span ng-switch-when="ok" ng-i18next="submission_congratulations"></span>
       <span ng-switch-when="error">

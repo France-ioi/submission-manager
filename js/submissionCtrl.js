@@ -49,7 +49,7 @@ function addScript (str)
    $('head').append('<script type="text/javascript">' + str + '</script>');
 }
 
-angular.module('submission-manager').controller('submissionController', ['$scope', '$sce', '$rootScope', '$i18next', '$sanitize', function($scope, $sce, $rootScope, $i18next, $sanitize)
+angular.module('submission-manager').controller('submissionController', ['$scope', '$sce', '$rootScope', '$i18next', '$sanitize', '$interpolate', function($scope, $sce, $rootScope, $i18next, $sanitize, $interpolate)
 {
    $scope.submissionManager = submissionManager;
    $scope.submissionManager.initConstants($scope);
@@ -377,6 +377,27 @@ angular.module('submission-manager').controller('submissionController', ['$scope
       } else {
          return $i18next.t('evaluation_answer') + '<pre>'+htmlEntities(sLog)+'</pre>';
       }
+   };
+
+   $scope.hasSpecialTestOutput = function(curTest) {
+      if(curTest.iScore > 0 || !curTest.sErrorMsg) {
+         return false;
+      }
+      if(curTest.sErrorMsg.substr(0, 1) == '{') {
+         try {
+            var pyfeJson = JSON.parse(curTest.sErrorMsg);
+            if(pyfeJson.blockIds) {
+               curTest.pyfeJson = pyfeJson;
+               return 'pyFrenchErrors';
+            }
+         } catch(e) {}
+      }
+      return false;
+   };
+
+   $scope.displayPyfeBlocks = function(blockIds) {
+      window.highlightBlocklyBlocks(blockIds);
+      $('html, body').animate({scrollTop: "0px"});
    };
 
    $scope.round = function(val)
