@@ -98,6 +98,7 @@
    width: 100% !important;
    line-height: inherit !important;
    color: inherit !important;
+   white-space: pre-wrap;
 }
 
 .score
