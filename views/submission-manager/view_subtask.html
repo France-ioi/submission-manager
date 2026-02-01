@@ -1,8 +1,8 @@
 <uib-accordion-heading>
    <div class="subtask">
       <span class="subtask_name">
-         <span class="glyphicon glyphicon-ok image_succeed_subtask" ng-show="submissionSubtask.bSuccess"></span>
-         <span class="glyphicon glyphicon-remove image_failure_subtask" ng-show="!submissionSubtask.bSuccess"></span>
+         <span class="glyphicon glyphicon-ok image_succeed_subtask" ng-show="countTestsSucceeded(submissionSubtask) == submissionSubtask.submissionTests.length"></span>
+         <span class="glyphicon glyphicon-remove image_failure_subtask" ng-show="countTestsSucceeded(submissionSubtask) != submissionSubtask.submissionTests.length"></span>
          {{submissionSubtask.subtask_name}}
       </span>
 
